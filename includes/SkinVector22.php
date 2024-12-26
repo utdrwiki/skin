@@ -7,6 +7,7 @@ use MediaWiki\Language\Language;
 use MediaWiki\Languages\LanguageConverterFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Registration\ExtensionRegistry;
+use MediaWiki\Skin\SkinComponentUtils;
 use MediaWiki\Skin\SkinMustache;
 use MediaWiki\Skin\SkinTemplate;
 use MediaWiki\Skins\Vector\Components\VectorComponentAppearance;
@@ -519,5 +520,29 @@ class SkinVector22 extends SkinMustache {
 		$link = Html::rawElement( 'a', $linkAttrs, $icon );
 		$result = Html::rawElement( 'span', [ 'class' => 'mw-editsection' ], $link );
 		return $result;
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	protected function buildNavUrls() {
+		$navUrls = parent::buildNavUrls();
+		unset( $navUrls['print'] );
+		unset( $navUrls['permalink'] );
+		unset( $navUrls['recentchangeslinked'] );
+		return $navUrls;
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function makeToolbox( $navUrls, $feedUrls ) {
+		return [
+			...parent::makeToolbox( $navUrls, [] ),
+			'specialpages' => [
+				'href' => SkinComponentUtils::makeSpecialUrl( 'Specialpages' ),
+				'id' => 't-specialpages',
+			],
+		];
 	}
 }
