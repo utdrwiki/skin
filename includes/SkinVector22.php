@@ -438,8 +438,19 @@ class SkinVector22 extends SkinMustache {
 			$this->getOutput()->addHtmlClasses( 'vector-toc-not-available' );
 		}
 
+		/* UTW change: we always display the user menu
 		$isRegistered = $user->isRegistered();
 		$userPage = $isRegistered ? $this->buildPersonalPageItem() : [];
+		*/
+		$userPage = $this->buildPersonalPageItem();
+		$mainMenu = new VectorComponentMainMenu(
+			$sidebar,
+			$portlets['data-languages'] ?? [],
+			$localizer,
+			$user,
+			$featureManager,
+			$this,
+		);
 
 		$components = $tocComponents + [
 			/* UTW change: edit button rework
@@ -493,14 +504,7 @@ class SkinVector22 extends SkinMustache {
 				Constants::SEARCH_BOX_INPUT_LOCATION_MOVED,
 				$localizer
 			),
-			'data-main-menu' => new VectorComponentMainMenu(
-				$sidebar,
-				$portlets['data-languages'] ?? [],
-				$localizer,
-				$user,
-				$featureManager,
-				$this,
-			),
+			'data-main-menu' => $mainMenu,
 			'data-main-menu-dropdown' => new VectorComponentDropdown(
 				VectorComponentMainMenu::ID . '-dropdown',
 				$this->msg( VectorComponentMainMenu::ID . '-label' )->text(),
