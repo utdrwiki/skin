@@ -70,7 +70,9 @@ class VectorComponentUserLinks implements VectorComponent {
 		$isAnon = !$user->isRegistered();
 
 		$class = 'vector-user-menu';
+		/* UTDR change: with the new setup of the top bar, this isn't really needed
 		$class .= ' vector-button-flush-right';
+		*/
 		$class .= !$isAnon ?
 			' vector-user-menu-logged-in' :
 			' vector-user-menu-logged-out';
@@ -264,6 +266,10 @@ class VectorComponentUserLinks implements VectorComponent {
 		$userPage = $this->makeItemsCollapsible(
 			$this->stripIcons( $portletData[ 'data-user-page' ]['array-items'] ?? [] )
 		);
+		// UTDR change: we only need the alert button.
+		if ( !empty( $portletData[ 'data-notifications' ]['array-items'] ) ) {
+			$portletData[ 'data-notifications' ]['array-items'] = [ $portletData[ 'data-notifications' ]['array-items'][0] ];
+		}
 		$notifications = $this->makeLinksButtons(
 			$portletData[ 'data-notifications' ]['array-items'] ?? [],
 			true,
@@ -316,6 +322,7 @@ class VectorComponentUserLinks implements VectorComponent {
 			'html-items' => null,
 			'array-list-items' => $userInterfacePreferences,
 		] );
+		/* UTDR change: we don't need the user page link
 		$userPageMenu = new VectorComponentMenu( [
 			'id' => 'p-vector-user-menu-userpage',
 			'class' => self::getOverflowMenuClass( $userPage ),
@@ -323,6 +330,7 @@ class VectorComponentUserLinks implements VectorComponent {
 			'html-items' => null,
 			'array-list-items' => $userPage,
 		] );
+		*/
 		$notificationsMenu = new VectorComponentMenu( [
 			'id' => 'p-vector-user-menu-notifications',
 			'class' => self::getOverflowMenuClass( $notifications ),
@@ -330,6 +338,7 @@ class VectorComponentUserLinks implements VectorComponent {
 			'html-items' => null,
 			'array-list-items' => $notifications,
 		] );
+		/* UTDR change: we don't need the overflow menu
 		$overflowMenu = new VectorComponentMenu( [
 			'id' => 'p-vector-user-menu-overflow',
 			'class' => self::getOverflowMenuClass( $overflow ),
@@ -337,15 +346,20 @@ class VectorComponentUserLinks implements VectorComponent {
 			'html-items' => null,
 			'array-list-items' => $overflow,
 		] );
+		*/
 
 		return [
 			'is-wide' => array_filter(
 				[ $overflow, $notifications, $userPage, $userInterfacePreferences ]
 			) !== [],
 			'data-user-links-notifications' => $notificationsMenu->getTemplateData(),
+			/* UTDR change: we don't need the overflow menu
 			'data-user-links-overflow' => $overflowMenu->getTemplateData(),
+			*/
 			'data-user-links-preferences' => $preferencesMenu->getTemplateData(),
+			/* UTDR change: we don't need the user page link
 			'data-user-links-user-page' => $userPageMenu->getTemplateData(),
+			*/
 			'data-user-links-dropdown' => $this->getDropdown(
 				$isDefaultAnonUserLinks, $isAnonEditorLinksEnabled, $userLinksCount )->getTemplateData(),
 			'data-user-links-menus' => array_map( static function ( $menu ) {

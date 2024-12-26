@@ -52,6 +52,7 @@
 
 	// Used to hide collapsible items inside the dropdown menu
 	// as well as the dropdown menu itself when the menu is empty
+	/* UTW change: the user link is always in the dropdown
 	&.user-links-collapsible-item,
 	.user-links-collapsible-item {
 		@media ( min-width: @min-width-breakpoint-tablet ) {
@@ -62,6 +63,7 @@
 			display: none;
 		}
 	}
+	*/
 }
 
 /**
@@ -88,7 +90,10 @@
 /**
  * Logged-in dropdown user menu.
  */
+/* UTW change: the user menu appears for logged out users too
 .vector-user-menu-logged-in .vector-dropdown-label {
+*/
+.vector-user-menu .vector-dropdown-label {
 	.mixin-vector-arrowed-dropdown-toggle();
 }
 

@@ -1,0 +1,13 @@
+<li id="{{id}}" class="mw-list-item utw-navbar-subitem {{ #hasItems }}utw-navbar-parent{{ /hasItems }}">
+	<a class="utw-navbar-subitem-link" href="{{href}}"{{#rel}} rel="{{.}}"{{/rel}}{{#target}} target="{{.}}"{{/target}}>
+		<span>{{text}}</span>
+		{{ #hasItems }} <span class="vector-icon mw-ui-icon-next mw-ui-icon-wikimedia-next"></span> {{ /hasItems }}
+	</a>
+	{{ #hasItems }}
+	<div class="vector-menu-content utw-navbar-subitem-collapsable">
+		<ul class="vector-menu-content-list utw-navbar-menu">
+			{{#items}}{{>NavbarSubitem}}{{/items}}
+		</ul>
+	</div>
+	{{ /hasItems }}
+</li>

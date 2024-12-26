@@ -21,6 +21,7 @@ class VectorComponentMainMenu implements VectorComponent {
 	private $isPinned;
 	/** @var VectorComponentPinnableHeader|null */
 	private $pinnableHeader;
+	private $navbarData;
 	/** @var string */
 	public const ID = 'vector-main-menu';
 
@@ -38,7 +39,8 @@ class VectorComponentMainMenu implements VectorComponent {
 		MessageLocalizer $localizer,
 		UserIdentity $user,
 		FeatureManager $featureManager,
-		Skin $skin
+		Skin $skin,
+		array $navbarData,
 	) {
 		$this->sidebarData = $sidebarData;
 		$this->languageData = $languageData;
@@ -51,6 +53,7 @@ class VectorComponentMainMenu implements VectorComponent {
 			self::ID,
 			'main-menu-pinned'
 		);
+		$this->navbarData = $navbarData;
 	}
 
 	/**
@@ -76,6 +79,7 @@ class VectorComponentMainMenu implements VectorComponent {
 			'data-pinnable-header' => $pinnableHeader->getTemplateData(),
 			*/
 			'data-languages' => $languageMenu->getTemplateData(),
+			'data-navbar' => $this->navbarData,
 		];
 	}
 }

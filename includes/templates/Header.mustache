@@ -1,9 +1,9 @@
 <header class="vector-header mw-header no-font-mode-scale">
 	<div class="vector-header-start">
-		<nav class="vector-main-menu-landmark" aria-label="{{msg-vector-site-nav-label}}">
-			{{>MainMenuDropdown}}
-		</nav>
 		{{#data-logos}}{{>Logo}}{{/data-logos}}
+		{{#data-main-menu}}
+		{{>MainMenu}}
+		{{/data-main-menu}}
 	</div>
 	<div class="vector-header-end">
 		{{#data-search-box}}{{>SearchBox}}{{/data-search-box}}
