@@ -51,7 +51,9 @@ class VectorComponentAppearance implements VectorComponent {
 			$pinnedContainer->getTemplateData();
 
 		return $data + [
+			/* UTW change: we don't have 'pinning'
 			'data-pinnable-header' => $pinnableHeader->getTemplateData()
+			*/
 		];
 	}
 }
