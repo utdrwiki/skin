@@ -12,14 +12,6 @@
 }}
 <div id="vector-sticky-header" class="vector-sticky-header">
 	<div class="vector-sticky-header-start">
-		<div class="vector-sticky-header-icon-start vector-button-flush-left vector-button-flush-right" aria-hidden="true">
-			{{#data-button-start}}
-			{{>Button}}
-			{{/data-button-start}}
-		</div>
-		{{#data-search}}
-		{{>SearchBox}}
-		{{/data-search}}
 		<div class="vector-sticky-header-context-bar">
 			{{#data-toc}}
 			{{! TOC is moved into this dropdown from the sidebar in stickyHeader.js. }}
@@ -34,11 +26,19 @@
 				{{/data-sticky-header-toc-dropdown}}
 			</nav>
 			{{/data-toc}}
-			<div class="vector-sticky-header-context-bar-primary" aria-hidden="true" {{{html-user-language-attributes}}}>{{{html-title}}}</div>
 		</div>
+		{{#data-main-menu}}
+		{{>MainMenu}}
+		{{/data-main-menu}}
 	</div>
-	<div class="vector-sticky-header-end" aria-hidden="true">
+	<div class="vector-sticky-header-end">
+		{{#data-search}}
+		{{>SearchBox}}
+		{{/data-search}}
 		<div class="vector-sticky-header-icons">
+			{{#data-button-start}}
+			{{>Button}}
+			{{/data-button-start}}
 			{{#array-icon-buttons}}
 			{{>Button}}
 			{{/array-icon-buttons}}
