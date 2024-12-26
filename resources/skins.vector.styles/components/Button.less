@@ -19,6 +19,8 @@
 	// FIXME: T338163 Replace with Codex solution i.e. `.cdx-button--size-large`
 	@media ( max-width: @max-width-breakpoint-tablet ) {
 		@min-size-interactive-touch: 44px;
+		// UTW change: 32px seems enough for interactivity
+		@min-size-interactive-touch: 32px;
 		min-height: @min-size-interactive-touch;
 		// FIXME: This results in inconsistencies with icon-only buttons with a dropdown arrow
 		// (i.e. user dropdown toggle), because those buttons should have a larger width than

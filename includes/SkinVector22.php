@@ -25,6 +25,7 @@ use MediaWiki\Skins\Vector\Components\VectorComponentUserLinks;
 use MediaWiki\Skins\Vector\Components\VectorComponentVariants;
 use MediaWiki\Skins\Vector\FeatureManagement\FeatureManager;
 use MediaWiki\Skins\Vector\FeatureManagement\FeatureManagerFactory;
+use MediaWiki\Skins\Vector\NavParser;
 use RuntimeException;
 
 /**
@@ -43,6 +44,8 @@ class SkinVector22 extends SkinMustache {
 	private FeatureManagerFactory $featureManagerFactory;
 	private ?FeatureManager $featureManager = null;
 
+	private NavParser $navParser;
+
 	public function __construct(
 		LanguageConverterFactory $languageConverterFactory,
 		FeatureManagerFactory $featureManagerFactory,
@@ -52,6 +55,7 @@ class SkinVector22 extends SkinMustache {
 		$this->languageConverterFactory = $languageConverterFactory;
 		// Cannot use the context in the constructor, setContext is called after construction
 		$this->featureManagerFactory = $featureManagerFactory;
+		$this->navParser = new NavParser($this);
 	}
 
 	/**
@@ -427,8 +431,22 @@ class SkinVector22 extends SkinMustache {
 			$this->getOutput()->addHtmlClasses( 'vector-toc-not-available' );
 		}
 
+		/* UTW change: we always display the user menu
 		$isRegistered = $user->isRegistered();
 		$userPage = $isRegistered ? $this->buildPersonalPageItem() : [];
+		*/
+		$userPage = $this->buildPersonalPageItem();
+
+		$newNavbar = $this->navParser->parseNavbar();
+		$mainMenu = new VectorComponentMainMenu(
+			$sidebar,
+			$portlets['data-languages'] ?? [],
+			$localizer,
+			$user,
+			$featureManager,
+			$this,
+			$newNavbar,
+		);
 
 		$components = $tocComponents + [
 			/* UTW change: edit button rework
@@ -482,14 +500,7 @@ class SkinVector22 extends SkinMustache {
 				Constants::SEARCH_BOX_INPUT_LOCATION_MOVED,
 				$localizer
 			),
-			'data-main-menu' => new VectorComponentMainMenu(
-				$sidebar,
-				$portlets['data-languages'] ?? [],
-				$localizer,
-				$user,
-				$featureManager,
-				$this,
-			),
+			'data-main-menu' => $mainMenu,
 			'data-main-menu-dropdown' => new VectorComponentDropdown(
 				VectorComponentMainMenu::ID . '-dropdown',
 				$this->msg( VectorComponentMainMenu::ID . '-label' )->text(),

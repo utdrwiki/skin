@@ -256,6 +256,10 @@ class Hooks implements
 		if ( $user->isRegistered() ) {
 			// Remove user page from personal menu dropdown for logged in use
 			$content_navigation['user-menu']['userpage']['collapsible'] = true;
+			// UTW change: remove user page from personal menu dropdown for temporary users
+			if ( $user->isTemp() ) {
+				unset( $content_navigation['user-menu']['userpage'] );
+			}
 			// watchlist may be disabled if $wgGroupPermissions['*']['viewmywatchlist'] = false;
 			// See [[phab:T299671]]
 			if ( isset( $content_navigation['user-menu']['watchlist'] ) ) {
