@@ -72,7 +72,9 @@ class VectorComponentMainMenu implements VectorComponent {
 		return $pinnableElement->getTemplateData() + $pinnableContainer->getTemplateData() + [
 			'data-portlets-first' => $firstPortlet->getTemplateData(),
 			'array-portlets-rest' => $portletsRest,
-			'data-pinnable-header' => $pinnableHeader ? $pinnableHeader->getTemplateData() : null,
+			/* UTW change: we don't have 'pinning'
+			'data-pinnable-header' => $pinnableHeader->getTemplateData(),
+			*/
 			'data-languages' => $languageMenu->getTemplateData(),
 		];
 	}
