@@ -85,7 +85,9 @@ class VectorComponentPageTools implements VectorComponent {
 			$pinnedContainer->getTemplateData();
 
 		return $data + [
+			/* UTW change: we don't have 'pinning'
 			'data-pinnable-header' => $this->pinnableHeader->getTemplateData(),
+			*/
 			'data-menus' => $this->getMenus()
 		];
 	}
