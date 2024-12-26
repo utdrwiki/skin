@@ -3,6 +3,7 @@
 namespace MediaWiki\Skins\Vector;
 
 use MediaWiki\Html\Html;
+use MediaWiki\Language\Language;
 use MediaWiki\Languages\LanguageConverterFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Registration\ExtensionRegistry;
@@ -525,5 +526,20 @@ class SkinVector22 extends SkinMustache {
 			// Cast empty string to null
 			'html-subtitle' => $parentData['html-subtitle'] === '' ? null : $parentData['html-subtitle'],
 		] );
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	protected function doEditSectionLinksHTML( array $links, Language $lang ) {
+		$icon = Html::element( 'span', [ 'class' => 'vector-icon mw-ui-icon-edit mw-ui-icon-wikimedia-edit' ] );
+		$linkData = $links[0];
+		$linkAttrs = [];
+		foreach ( $linkData['array-attributes'] as $attr ) {
+			$linkAttrs[$attr['key']] = $attr['value'];
+		}
+		$link = Html::rawElement( 'a', $linkAttrs, $icon );
+		$result = Html::rawElement( 'span', [ 'class' => 'mw-editsection' ], $link );
+		return $result;
 	}
 }
