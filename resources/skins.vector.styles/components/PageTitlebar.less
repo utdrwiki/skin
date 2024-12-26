@@ -28,6 +28,7 @@
 		white-space: nowrap;
 	}
 
+	/* UTW change: now that the languages are above, we don't need this
 	> .cdx-button,
 	> .mw-portlet-lang {
 		&:last-child {
@@ -42,5 +43,18 @@
 	// Currently the icon only language button is misaligned on smaller viewports
 	> .mw-portlet-lang-icon-only:last-child {
 		.cdx-mixin-button-layout-flush( 'end', true );
+	}
+	*/
+	@media ( max-width: @max-width-breakpoint-mobile ) {
+		flex-wrap: wrap;
+
+		.firstHeading {
+			flex: 1;
+		}
+
+		.vector-primary-action-nav {
+			flex-basis: 100%;
+			justify-content: center;
+		}
 	}
 }
