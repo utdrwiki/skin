@@ -138,7 +138,9 @@ class FeatureManagerFactory {
 			Constants::FEATURE_PAGE_TOOLS_PINNED,
 			[
 				Constants::REQUIREMENT_FULLY_INITIALISED,
+				/* UTW change: we want the sidebar to always appear
 				Constants::REQUIREMENT_LOGGED_IN,
+				*/
 				Constants::REQUIREMENT_PAGE_TOOLS_PINNED
 			]
 		);

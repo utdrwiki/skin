@@ -37,13 +37,13 @@
 		<div class="vector-sitenotice-container">
 			{{{html-site-notice}}}
 		</div>
-		{{>ColumnStart}}
+		{{! UTW change: the left sidebar is not used for anything }}
+		{{! >ColumnStart}}
 		<div class="mw-content-container">
 			{{! `role` is unnecessary but kept to support selectors in any gadgets or user styles. }}
 			<main id="content" class="mw-body">
-				{{>PageTitlebar}}
 				{{>PageToolbar}}
-				{{>ColumnEnd}}
+				{{>PageTitlebar}}
 				<div id="bodyContent" class="vector-body" aria-labelledby="firstHeading" data-mw-ve-target-container>
 					{{>BeforeContent}}
 					{{! the #contentSub element is currently used by editors, do not hide or remove it
@@ -57,6 +57,7 @@
 						{{#data-lang-dropdown}}{{>LanguageDropdown}}{{/data-lang-dropdown}}
 					{{/is-language-in-content-bottom}}
 				</div>
+				{{>ColumnEnd}}
 			</main>
 			{{{html-after-content}}}
 		</div>

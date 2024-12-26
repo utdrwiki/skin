@@ -356,7 +356,10 @@ class SkinVector22 extends SkinMustache {
 					// label
 					$this->msg( 'vector-toc-collapsible-button-label' ),
 					// class
+					/* UTW change: we don't want to flush the icon to the left
 					'vector-page-titlebar-toc vector-button-flush-left',
+					*/
+					'vector-page-titlebar-toc',
 					// icon
 					'listBullet',
 					Html::expandAttributes( [
@@ -453,7 +456,10 @@ class SkinVector22 extends SkinMustache {
 				] )
 			),
 			'data-page-tools' => new VectorComponentPageTools(
+				/* UTW change: page tools now go to the edit dropdown
 				array_merge( [ $portlets['data-actions'] ?? [] ], $pageToolsMenu ),
+				*/
+				$pageToolsMenu,
 				$localizer,
 				$featureManager
 			),
@@ -510,11 +516,15 @@ class SkinVector22 extends SkinMustache {
 		}
 
 		return array_merge( $parentData, [
+			/* UTW change: indicators and the language menu should always be at the top
 			'is-language-in-content' => $this->isLanguagesInContent(),
 			'has-buttons-in-content-top' => $this->isLanguagesInContentAt( 'top' ) || $hasAddTopicButton,
+			*/
+			'is-language-in-content' => true,
+			'has-buttons-in-content-top' => false,
 			'is-language-in-content-bottom' => $this->isLanguagesInContentAt( 'bottom' ),
 			// Cast empty string to null
-			'html-subtitle' => $parentData['html-subtitle'] === '' ? null : $parentData['html-subtitle'],
+			'html-subtitle' => $this->getSubtitle( $parentData['html-subtitle'] ),
 		] );
 	}
 
@@ -542,5 +552,52 @@ class SkinVector22 extends SkinMustache {
 		unset( $nav_urls['permalink'] );
 		unset( $nav_urls['recentchangeslinked'] );
 		return $nav_urls;
+	}
+
+	/**
+	 * Remove the "Help" indicator from rendered indicators.
+	 * @param array $indicators Array of indicators from $out->getIndicators()
+	 * @return array
+	 */
+	protected function getIndicatorsData( array $indicators ): array {
+		unset( $indicators['mw-helplink'] );
+		return parent::getIndicatorsData( $indicators );
+	}
+
+	/**
+	 * Adds the "Back to page" button to the subtitle. If the subtitle is empty,
+	 * returns null.
+	 * @param string $oldSubtitle Regular page subtitle
+	 * @return string|null
+	 */
+	private function getSubtitle( string $oldSubtitle ): string|null {
+		$subtitle = $oldSubtitle;
+		if (
+			// If this page is related to a wiki page
+			$this->canUseWikiPage() &&
+			(
+				// and we're not viewing page content,
+				$this->getActionName() !== 'view' ||
+				$this->getRequest()->getRawVal( 'diff' ) ||
+				// or we're viewing a talkpage
+				$this->getTitle()->isTalkPage()
+			)
+		) {
+			// then display the "Back to page" button.
+			$title = $this->getTitle();
+			if ( !$this->getTitle()->isTalkPage() ) {
+				// Non-view actions have precedence, because when we're editing
+				// a talk page we want to see a button back to the talk page,
+				// not the subject page.
+				$targetTitle = $title;
+			} else {
+				$targetTitle = $title->getSubjectPage();
+			}
+			$backButtonHtml = '< ' . Html::element( 'a', [
+				'href' => $targetTitle->getLocalURL()
+			], $this->msg( 'utw-back-to-page' )->escaped() );
+			$subtitle = $backButtonHtml . $subtitle;
+		}
+		return $subtitle === '' ? null : $subtitle;
 	}
 }
