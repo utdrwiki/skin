@@ -35,6 +35,16 @@ pre,
 .mw-editsection,
 .mw-editsection-like {
 	font-family: @font-family-sans;
+
+	// UTW change: make edit section icons smaller
+	.vector-icon {
+		background-color: @color-progressive;
+		.cdx-mixin-css-icon-size( @size-icon-small );
+	}
+
+	@media ( max-width: @max-width-breakpoint-mobile ) {
+		float: right;
+	}
 }
 
 /* Main content area, including siteNotice, indicators, categories, firstHeading and `.vector-body`. */
