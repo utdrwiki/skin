@@ -1,0 +1,47 @@
+.vector-primary-action-nav {
+    display: flex;
+
+    .vector-dropdown-content {
+        left: auto;
+        right: 0;
+    }
+
+    #p-cactions {
+        padding: 8px;
+    }
+
+    #p-cactions-label::after {
+        @icon-more: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-dots-vertical' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'%3E%3C/path%3E%3Cpath d='M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0'%3E%3C/path%3E%3Cpath d='M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0'%3E%3C/path%3E%3Cpath d='M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0'%3E%3C/path%3E%3C/svg%3E");
+        background-color: @color-progressive;
+        height: 20px;
+        width: 20px;
+        -webkit-mask-image: @icon-more;
+        -webkit-mask-size: 100% 100%;
+        mask-image: @icon-more;
+        mask-size: 100% 100%;
+    }
+
+    #p-cactions-label::before {
+        background-color: @border-color-base;
+        content: "";
+        display: inline-block;
+        height: 16px;
+        left: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    > a {
+        align-items: center;
+        display: flex;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 8px 16px;
+        text-transform: uppercase;
+
+        .vector-icon {
+            background-color: @color-progressive;
+            margin-right: 6px;
+        }
+    }
+}

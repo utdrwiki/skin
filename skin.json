@@ -288,6 +288,7 @@
 			"class": "MediaWiki\\ResourceLoader\\OOUIIconPackModule",
 			"useMaskImage": true,
 			"icons": [
+				"add",
 				"article",
 				"edit",
 				"editLock",
