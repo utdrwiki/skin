@@ -1,7 +1,9 @@
+/* UTW change: this is too much padding, we don't need this
 .mw-footer-container {
 	padding-top: 50px;
 	padding-bottom: 82px;
 }
+*/
 
 .mw-footer {
 	direction: ltr;
@@ -48,9 +50,13 @@
 }
 
 #footer-places {
+	/* UTW change: this floating sucks, replace with flex
 	li {
 		float: left;
 		margin-right: 1em;
 		line-height: @line-height-footer-buttons;
 	}
+	*/
+	display: flex;
+	gap: 1em;
 }
