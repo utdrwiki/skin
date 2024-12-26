@@ -57,7 +57,10 @@ const getHeadingIntersectionHandler = ( changeActiveSection ) =>
 const updateTocLocation = () => {
 	const isPinned = features.isEnabled( 'toc-pinned' );
 	const isStickyHeaderVisible = document.body.classList.contains( STICKY_HEADER_VISIBLE_CLASS );
+	/* UTW change: we make the header work on all widths
 	const isBelowDesktop = belowDesktopMedia.matches;
+	*/
+	const isBelowDesktop = false;
 
 	const pinnedContainerId = 'vector-toc-pinned-container';
 	const stickyHeaderUnpinnedContainerId = 'vector-sticky-header-toc-unpinned-container';
