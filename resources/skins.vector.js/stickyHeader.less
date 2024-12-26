@@ -16,10 +16,16 @@
 }
 
 .vector-sticky-header {
+	box-sizing: border-box;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	background-color: @background-color-progressive;
+	padding-left: @padding-sticky-header-desktop;
+	padding-right: @padding-sticky-header-desktop;
+	/* UTW change: we don't need a border at the bottom of the sticky header
 	border-bottom: @border-width-base @border-style-base @border-color-content-box;
+	*/
 
 	//
 	// Layout
@@ -49,12 +55,14 @@
 	//
 	// Components
 	//
+	/* UTW change: we moved the search box to the right, so we don't need this
 	&-context-bar {
 		border-left: @border-subtle;
 		padding-left: @spacing-search-title-divider;
 		min-width: 0;
 		margin-left: @spacing-search-title-divider;
 	}
+	*/
 
 	&-context-bar-primary {
 		overflow: hidden;
@@ -95,9 +103,17 @@
 		// [2] see https://gerrit.wikimedia.org/r/plugins/gitiles/design/codex/+/refs/tags/v0.1.0-alpha.8/packages/codex/src/components/typeahead-search/TypeaheadSearch.vue#708
 		@margin-start-search-box-with-thumbnail: -9px;
 
-		.vector-sticky-header-search-toggle,
-		.vector-sticky-header-context-bar {
+		.vector-sticky-header-search-toggle {
 			display: none;
+		}
+
+		@media ( max-width: @max-width-breakpoint-tablet ) {
+			.vector-user-links,
+			.mobile-navigation,
+			.discussions-button,
+			.vector-sticky-header-context-bar {
+				display: none;
+			}
 		}
 
 		.vector-search-box {
@@ -115,10 +131,18 @@
 			}
 		}
 	}
+
+	// UTW change: recolor the header icons
+	.cdx-button .vector-icon,
+	.vector-user-menu .vector-dropdown-label::after {
+		background-color: @color-inverted-fixed;
+	}
 }
 
 // T298836 Sticky header is only shown at higher resolutions
+/* UTW change: sticky header is always shown
 @media ( min-width: @min-width-breakpoint-desktop ) {
+*/
 	.client-js.vector-sticky-header-enabled {
 		// T290518: When the sticky header is enabled (feature flag is on, js is
 		// enabled, and viewport is at higher resolutions), add scroll padding to the
@@ -161,4 +185,6 @@
 			top: @height-header !important;
 		}
 	}
+/* UTW change: sticky header is always shown
 }
+*/
