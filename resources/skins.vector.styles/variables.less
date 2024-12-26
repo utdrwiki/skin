@@ -138,7 +138,10 @@
 //
 // Layout
 //
+/* UTW change: page layout changes
 @max-width-page-container: unit( ( 1596px / @font-size-browser ), rem ); // T305069 - 99.75rem @ 16
+*/
+@max-width-page-container: 1280px;
 @max-width-content-container: unit( ( 948px / @font-size-browser ), rem ); // T335155
 @padding-horizontal-page-container: unit( ( 24px / @font-size-browser ), rem );
 @padding-horizontal-page-container-desktop: unit( ( 44px / @font-size-browser ), rem );
@@ -157,7 +160,11 @@
 @grid-column-gap: 24px;
 /* Use of minmax is important to restrict the maximum grid column width more information: T314756 */
 @width-page-content: minmax(0, 1fr);
+/* UTW change: page layout changes
 @width-column-desktop: unit( ( 196px / @font-size-browser ), rem ); // Total width including gap is 232px
 @width-column-desktop-wide: unit( ( 248px / @font-size-browser ), rem ); // Total width including gap is 284px
+*/
+@width-column-desktop: 300px;
+@width-column-desktop-wide: 300px;
 @grid-template-column-desktop: ~'@{width-column-desktop} @{width-page-content}';
 @grid-template-column-desktop-wide: ~'@{width-column-desktop-wide} @{width-page-content}';
