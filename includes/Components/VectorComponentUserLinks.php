@@ -69,7 +69,9 @@ class VectorComponentUserLinks implements VectorComponent {
 		$isAnon = !$user->isRegistered();
 
 		$class = 'vector-user-menu';
+		/* UTW change: with the new setup of the top bar, this isn't really needed
 		$class .= ' vector-button-flush-right';
+		*/
 		$class .= !$isAnon ?
 			' vector-user-menu-logged-in' :
 			' vector-user-menu-logged-out';
@@ -261,6 +263,10 @@ class VectorComponentUserLinks implements VectorComponent {
 		$userPage = $this->makeItemsCollapsible(
 			$this->stripIcons( $portletData[ 'data-user-page' ]['array-items'] ?? [] )
 		);
+		// UTW change: we only need the alert button.
+		if ( !empty( $portletData[ 'data-notifications' ]['array-items'] ) ) {
+			$portletData[ 'data-notifications' ]['array-items'] = [ $portletData[ 'data-notifications' ]['array-items'][0] ];
+		}
 		$notifications = $this->makeLinksButtons(
 			$portletData[ 'data-notifications' ]['array-items'] ?? [],
 			true,
@@ -335,9 +341,13 @@ class VectorComponentUserLinks implements VectorComponent {
 				[ $overflow, $notifications, $userPage, $userInterfacePreferences ]
 			) !== [],
 			'data-user-links-notifications' => $notificationsMenu->getTemplateData(),
+			/* UTW change: we don't need the overflow menu
 			'data-user-links-overflow' => $overflowMenu->getTemplateData(),
+			*/
 			'data-user-links-preferences' => $preferencesMenu->getTemplateData(),
+			/* UTW change: we don't need the user page link
 			'data-user-links-user-page' => $userPageMenu->getTemplateData(),
+			*/
 			'data-user-links-dropdown' => $this->getDropdown(
 				$isDefaultAnonUserLinks, $isAnonEditorLinksEnabled, $userLinksCount )->getTemplateData(),
 			'data-user-links-menus' => array_map( static function ( $menu ) {

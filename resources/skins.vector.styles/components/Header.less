@@ -4,6 +4,7 @@
 	flex-wrap: nowrap;
 	// https://caniuse.com/#search=align-items
 	align-items: center;
+	justify-content: space-between;
 	padding-top: 8px;
 	padding-bottom: 8px;
 
@@ -13,9 +14,11 @@
 		align-items: center;
 	}
 
+	/* UTW change: we want the search bar to appear on the right
 	.vector-header-end {
 		flex-grow: 1;
 	}
+	*/
 
 	.search-toggle {
 		// At lower resolutions the search input is hidden and a toggle is shown
@@ -31,6 +34,11 @@
 			// Override .cdx-button styles
 			display: none !important;  /* stylelint-disable-line declaration-no-important */
 		}
+	}
+
+	/* UTW change: header space is tight, shrink the search bar a bit */
+	.cdx-search-input .cdx-text-input {
+		min-width: 220px;
 	}
 
 	.vector-typeahead-search-container {
@@ -54,7 +62,10 @@
 		 */
 		&.vector-header-search-toggled {
 			.vector-header-start,
-			.search-toggle {
+			.vector-user-links,
+			.mobile-navigation-show,
+			.search-toggle,
+			.discussions-button {
 				display: none;
 			}
 
@@ -75,6 +86,162 @@
 			.cdx-typeahead-search--expanded .cdx-search-input__end-button {
 				border-bottom-right-radius: 0;
 			}
+		}
+	}
+
+	// UTW change: recolor the header icons
+	.vector-icon,
+	.vector-user-menu .vector-dropdown-label::after {
+		background-color: @background-color-progressive--hover;
+	}
+}
+
+// UTW change: new header styles!
+.mobile-navigation .vector-menu,
+.mw-header .vector-header-start .vector-menu,
+.vector-sticky-header .vector-sticky-header-start .vector-menu {
+	position: relative;
+
+	.vector-menu-heading {
+		cursor: pointer;
+		display: flex;
+		font-size: 12px;
+		font-weight: bold;
+		justify-content: space-between;
+		line-height: 18px;
+		margin: 0;
+		padding: 6px 4px;
+		text-transform: uppercase;
+
+		a, a:visited, a:hover, span {
+			color: @color-inverted-fixed;
+			text-decoration: none;
+		}
+
+		&::after {
+			@icon-chevron-down: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-chevron-down' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'%3E%3C/path%3E%3Cpath d='M6 9l6 6l6 -6'%3E%3C/path%3E%3C/svg%3E");
+			content: "";
+			display: block;
+			pointer-events: none;
+			width: 14px;
+			height: 14px;
+			margin-top: 1px;
+			-webkit-mask: @icon-chevron-down no-repeat;
+			mask: @icon-chevron-down no-repeat;
+			-webkit-mask-size: 100% 100%;
+			mask-size: 100% 100%;
+			-webkit-mask-position: center center;
+			mask-position: center center;
+			background-color: @color-inverted-fixed;
+			transform: scaleY(-1);
+			padding-left: 10px;
+		}
+	}
+
+	&:not(:hover) {
+		.vector-menu-heading::after {
+			transform: none;
+		}
+	}
+	
+	.utw-navbar-subitem {
+		a.utw-navbar-subitem-link {
+			display: flex;
+			justify-content: space-between;
+
+			.vector-icon {
+				mask-size: 1em;
+				background-color: @color-subtle;
+				margin-left: 18px;
+			}
+
+			margin-right: 4px;
+		}
+
+		& > div.utw-navbar-subitem-collapsable {
+			display: none;
+
+			position: absolute;
+			left: 100%;
+			top: 0;
+		}
+
+		&:hover, &.shown {
+			> div.utw-navbar-subitem-collapsable {
+				display: block;
+			}
+		}
+	}
+
+	.vector-menu-content {
+		padding: 0;
+		margin: 0;
+		display: none;
+		position: absolute;
+		left: 0;
+		top: 100%;
+		width: max-content;
+		min-width: 8em;
+		background-color: @background-color-neutral;
+		box-shadow: 0px 0px 15px 0px rgba(10, 10, 10, 0.7);
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+		z-index: 101;
+
+		&::before {
+			content: "";
+			display: none;
+			pointer-events: none;
+			height: 0;
+			border-top: 1px solid gray;
+			border-bottom: 1px solid gray;
+		}
+
+		ul {
+			padding: 4px;
+
+			&.utw-navbar-menu {
+				padding-right: 0;
+			}
+		}
+
+		li {
+			padding-left: 6px;
+			padding-right: 6px;
+			margin: 0;
+			transition: background 0.3s;
+
+			&:first-child {
+				margin-top: 6px;
+			}
+
+			a {
+				color: @color-base;
+				display: block;
+				font-size: 14px;
+				text-decoration: none;
+				padding: 6px 9px;
+				z-index: 100;
+
+				&:hover {
+					background: @background-color-progressive-subtle;
+					color: @color-progressive;
+				}
+			}
+		}
+	}
+
+	&:hover, &.shown {
+		.vector-menu-heading {
+			border-radius: 0;
+
+			&::after {
+				transform: scaleY(-1);
+			}
+		}
+
+		.vector-menu-content {
+			display: block;
 		}
 	}
 }
