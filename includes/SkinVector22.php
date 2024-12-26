@@ -560,6 +560,7 @@ class SkinVector22 extends SkinMustache {
 					Constants::SEARCH_BOX_INPUT_LOCATION_MOVED,
 					$localizer
 				),
+				$mainMenu,
 				// Show sticky ULS if the ULS extension is enabled and the ULS in header is not hidden
 				$this->isULSExtensionEnabled() && !$this->shouldHideLanguages() ?
 					new VectorComponentButton(

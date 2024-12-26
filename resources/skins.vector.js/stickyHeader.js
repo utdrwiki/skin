@@ -456,6 +456,7 @@ function makeStickyHeaderFunctional(
 		userLinksDropdownStickyContainer.appendChild( clonedUserLinksDropdown );
 	}
 
+	/* UTW change: we don't need these buttons
 	let namespaceName = mw.config.get( 'wgCanonicalNamespace' );
 	const namespaceNumber = mw.config.get( 'wgNamespaceNumber' );
 	if ( namespaceNumber >= 0 && namespaceNumber % 2 === 1 ) {
@@ -475,6 +476,7 @@ function makeStickyHeaderFunctional(
 		document.querySelector( '#' + namespaceTabId + ':not( .selected ) a' ),
 		document.querySelector( '#ca-watch a, #ca-unwatch a' )
 	);
+	*/
 
 	const veEdit = document.querySelector( '#ca-ve-edit a' );
 	const ceEdit = document.querySelector( '#ca-edit a' );
