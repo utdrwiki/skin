@@ -54,9 +54,11 @@ class VectorComponentMainMenu implements VectorComponent {
 			'main-menu-pinned'
 		);
 
+		/* UTW change: we do not need an opt out mechanism
 		if ( $user->isRegistered() ) {
 			$this->optOut = new VectorComponentMainMenuActionOptOut( $skin );
 		}
+		*/
 	}
 
 	/**
