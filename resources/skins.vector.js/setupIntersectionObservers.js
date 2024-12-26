@@ -262,11 +262,17 @@ const main = () => {
 		stickyHeaderElement = document.getElementById( stickyHeader.STICKY_HEADER_ID ),
 		stickyIntersection = document.getElementById( stickyHeader.FIRST_HEADING_ID ),
 		userLinksDropdown = document.getElementById( stickyHeader.USER_LINKS_DROPDOWN_ID ),
+		/* UTW change: sticky header is allowed in all namespaces and actions
 		allowedNamespace = stickyHeader.isAllowedNamespace( mw.config.get( 'wgNamespaceNumber' ) ),
 		allowedAction = stickyHeader.isAllowedAction( mw.config.get( 'wgAction' ) );
+		*/
+		allowedNamespace = true,
+		allowedAction = true;
 
 	const showStickyHeader =
+		/* UTW change: sticky header is visible to all
 		!mw.user.isAnon() &&
+		*/
 		!!stickyHeaderElement &&
 		!!stickyIntersection &&
 		!!userLinksDropdown &&

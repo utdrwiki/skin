@@ -65,6 +65,8 @@ class VectorComponentStickyHeader implements VectorComponent {
 	private $localizer;
 	/** @var VectorComponent */
 	private $search;
+	/** @var VectorComponentMainMenu */
+	private $mainMenu;
 	/** @var VectorComponent|null */
 	private $langButton;
 
@@ -74,16 +76,19 @@ class VectorComponentStickyHeader implements VectorComponent {
 	/**
 	 * @param MessageLocalizer $localizer
 	 * @param VectorComponent $searchBox
+	 * @param VectorComponentMainMenu $mainMenu
 	 * @param VectorComponent|null $langButton
 	 * @param bool $visualEditorTabPositionFirst
 	 */
 	public function __construct(
 		MessageLocalizer $localizer,
 		VectorComponent $searchBox,
+		VectorComponentMainMenu $mainMenu,
 		$langButton = null,
 		bool $visualEditorTabPositionFirst = false
 	) {
 		$this->search = $searchBox;
+		$this->mainMenu = $mainMenu;
 		$this->langButton = $langButton;
 		$this->localizer = $localizer;
 		$this->visualEditorTabPositionFirst = $visualEditorTabPositionFirst;
@@ -188,12 +193,16 @@ class VectorComponentStickyHeader implements VectorComponent {
 		$buttonData = $this->langButton ? [ $this->langButton->getTemplateData() ] : [];
 		$buttonData[] = $this->getAddSectionButton()->getTemplateData();
 		$searchBoxData = $this->search->getTemplateData();
+		$mainMenuData = $this->mainMenu->getTemplateData();
 		$searchButtonData = $this->getSearchButton( $searchBoxData )->getTemplateData();
 		return [
+			/* UTW change: we don't need these buttons in the sticky header
 			'array-icon-buttons' => $iconButtonData,
+			*/
 			'array-buttons' => $buttonData,
 			'data-button-start' => $searchButtonData,
 			'data-search' => $searchBoxData,
+			'data-main-menu' => $mainMenuData,
 		];
 	}
 }
