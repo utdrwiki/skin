@@ -2,7 +2,11 @@
 // only applies to main page.
 // This must be limited to vector-page-titlebar as the mw-portlet-lang class is shared with
 // the language portlet that can display in the sidebar.
+/* UTW change: this is now in the toolbar
 .vector-page-titlebar .mw-portlet-lang {
+*/
+#vector-variants-dropdown,
+.vector-page-toolbar .mw-portlet-lang {
 	box-sizing: border-box;
 	flex-shrink: 0;
 
@@ -13,6 +17,9 @@
 	}
 
 	.vector-dropdown-label {
+		// UTW change: make the language dropdown nicer
+		border-radius: 5px;
+		padding: 5px;
 		// Prevent select of span text "X languages"
 		user-select: none;
 		// Set opacity to `1` on language button (it applies to more menu because of label color).
@@ -45,6 +52,12 @@
 		max-height: 65vh;
 		overflow: auto;
 		.mixin-vector-dropdown-content-flip();
+
+		// UTW change: make the language dropdown nicer
+		ul {
+			list-style-type: none;
+			margin: 0;
+		}
 
 		li a {
 			font-size: inherit;
