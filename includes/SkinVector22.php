@@ -542,4 +542,15 @@ class SkinVector22 extends SkinMustache {
 		$result = Html::rawElement( 'span', [ 'class' => 'mw-editsection' ], $link );
 		return $result;
 	}
+
+	/**
+	 * @inheritdoc
+	 */
+	protected function buildNavUrls() {
+		$nav_urls = parent::buildNavUrls();
+		unset( $nav_urls['print'] );
+		unset( $nav_urls['permalink'] );
+		unset( $nav_urls['recentchangeslinked'] );
+		return $nav_urls;
+	}
 }
