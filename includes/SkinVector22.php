@@ -9,6 +9,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Skins\Vector\Components\VectorComponentAppearance;
 use MediaWiki\Skins\Vector\Components\VectorComponentButton;
+use MediaWiki\Skins\Vector\Components\VectorComponentCategories;
 use MediaWiki\Skins\Vector\Components\VectorComponentDropdown;
 use MediaWiki\Skins\Vector\Components\VectorComponentLanguageDropdown;
 use MediaWiki\Skins\Vector\Components\VectorComponentMainMenu;
@@ -485,6 +486,10 @@ class SkinVector22 extends SkinMustache {
 				Html::expandAttributes( [
 					'title' => $this->msg( 'vector-appearance-tooltip' ),
 				] )
+			),
+			'data-categories' => new VectorComponentCategories(
+				$localizer,
+				$this->getOutput()
 			),
 			'data-vector-sticky-header' => $featureManager->isFeatureEnabled(
 				Constants::FEATURE_STICKY_HEADER
