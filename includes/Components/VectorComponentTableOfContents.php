@@ -93,7 +93,9 @@ class VectorComponentTableOfContents implements VectorComponent {
 				$this->tocData[ 'number-section-count'] >= $this->config->get(
 					'VectorTableOfContentsCollapseAtCount'
 				),
+			/* UTW change: we don't have 'pinning'
 			'data-pinnable-header' => $this->pinnableHeader->getTemplateData(),
+			*/
 		] );
 	}
 }
