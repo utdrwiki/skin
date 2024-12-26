@@ -17,6 +17,7 @@ use MediaWiki\Skins\Vector\Components\VectorComponentLanguageDropdown;
 use MediaWiki\Skins\Vector\Components\VectorComponentMainMenu;
 use MediaWiki\Skins\Vector\Components\VectorComponentPageTools;
 use MediaWiki\Skins\Vector\Components\VectorComponentPinnableContainer;
+use MediaWiki\Skins\Vector\Components\VectorComponentPrimaryAction;
 use MediaWiki\Skins\Vector\Components\VectorComponentSearchBox;
 use MediaWiki\Skins\Vector\Components\VectorComponentStickyHeader;
 use MediaWiki\Skins\Vector\Components\VectorComponentTableOfContents;
@@ -35,6 +36,8 @@ class SkinVector22 extends SkinMustache {
 	private const STICKY_HEADER_ENABLED_CLASS = 'vector-sticky-header-enabled';
 	/** @var null|array for caching purposes */
 	private $languages;
+	/** @var null|array primary action in the edit button */
+	private $primaryAction;
 
 	private LanguageConverterFactory $languageConverterFactory;
 	private FeatureManagerFactory $featureManagerFactory;
@@ -57,6 +60,38 @@ class SkinVector22 extends SkinMustache {
 	protected function runOnSkinTemplateNavigationHooks( SkinTemplate $skin, &$content_navigation ) {
 		parent::runOnSkinTemplateNavigationHooks( $skin, $content_navigation );
 		Hooks::onSkinTemplateNavigation( $skin, $content_navigation );
+		unset( $content_navigation['views']['view'] );
+		$primaryAction = null;
+		if ( isset( $content_navigation['views']['addsection'] ) ) {
+			$primaryAction = $content_navigation['views']['addsection'];
+			$primaryAction['icon'] = 'wikimedia-add';
+			unset( $content_navigation['views']['addsection'] );
+		} else if ( isset( $content_navigation['views']['ve-edit'] ) ) {
+			$primaryAction = $content_navigation['views']['ve-edit'];
+			$primaryAction['icon'] = 'wikimedia-edit';
+			unset( $content_navigation['views']['ve-edit'] );
+		} else if ( isset( $content_navigation['views']['edit'] ) ) {
+			$primaryAction = $content_navigation['views']['edit'];
+			$primaryAction['icon'] = 'wikimedia-edit';
+			unset( $content_navigation['views']['edit'] );
+		} else if ( isset( $content_navigation['views']['viewsource'] ) ) {
+			$primaryAction = $content_navigation['views']['viewsource'];
+			$primaryAction['icon'] = 'wikimedia-editLock';
+			unset( $content_navigation['views']['viewsource'] );
+		} else {
+			$firstKey = array_key_first( $content_navigation['views'] );
+			if ( $firstKey !== null ) {
+				$primaryAction = $content_navigation['views'][$firstKey];
+				unset( $content_navigation['views'][$firstKey] );
+			}
+		}
+		$content_navigation['actions'] = array_merge(
+			$content_navigation['views'],
+			$content_navigation['actions']
+		);
+		$content_navigation['views'] = [];
+		$content_navigation['views-overflow'] = [];
+		$this->primaryAction = $primaryAction;
 	}
 
 	/**
@@ -325,8 +360,10 @@ class SkinVector22 extends SkinMustache {
 		$pageToolsMenu = [];
 		self::extractPageToolsFromSidebar( $sidebar, $pageToolsMenu );
 
+		/* UTW change: edit button rework
 		$hasAddTopicButton = $config->get( 'VectorPromoteAddTopic' ) &&
 			$this->removeAddTopicButton( $parentData );
+		*/
 
 		$langButtonClass = $langData['class'] ?? '';
 		$ulsLabels = $this->getULSLabels();
@@ -394,6 +431,7 @@ class SkinVector22 extends SkinMustache {
 		$userPage = $isRegistered ? $this->buildPersonalPageItem() : [];
 
 		$components = $tocComponents + [
+			/* UTW change: edit button rework
 			'data-add-topic-button' => $hasAddTopicButton ? new VectorComponentButton(
 				$this->msg( [ 'vector-2022-action-addsection', 'skin-action-addsection' ] )->text(),
 				'speechBubbleAdd-progressive',
@@ -405,6 +443,11 @@ class SkinVector22 extends SkinMustache {
 				false,
 				$title->getLocalURL( [ 'action' => 'edit', 'section' => 'new' ] )
 			) : null,
+			*/
+			'data-primary-action' => new VectorComponentPrimaryAction(
+				$this->primaryAction,
+				$portlets['data-actions']
+			),
 			'data-variants' => new VectorComponentVariants(
 				$this->languageConverterFactory,
 				$portlets['data-variants'],
