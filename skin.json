@@ -462,7 +462,7 @@
 	},
 	"ResourceFileModulePaths": {
 		"localBasePath": "",
-		"remoteSkinPath": "Vector"
+		"remoteSkinPath": "UTVector"
 	},
 	"ResourceModuleSkinStyles": {
 		"vector-2022": {
