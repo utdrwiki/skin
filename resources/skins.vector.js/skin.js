@@ -109,6 +109,10 @@ function main( window ) {
 	// tab menu to a dropdown.
 	menuTabs();
 	tables();
+	// UTW change: cross-wiki login script
+	if ( mw.config.get( 'wgCanonicalSpecialPageName' ) === 'Userlogin' ) {
+		require( './login.js' )();
+	}
 }
 
 /**
