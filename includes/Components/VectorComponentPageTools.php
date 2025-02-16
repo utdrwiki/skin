@@ -54,6 +54,21 @@ class VectorComponentPageTools implements VectorComponent {
 		);
 	}
 
+	private function getItemIcon( ?string $itemId ): ?string {
+		switch ( $itemId ) {
+			case 't-whatlinkshere': return 'link';
+			case 't-newpage': return 'add';
+			case 't-upload': return 'upload';
+			case 't-specialpages': return 'specialPages';
+			case 't-info': return 'info';
+			case 't-contributions': return 'userContributions';
+			case 't-log': return 'listBullet';
+			case 't-blockip': return 'block';
+			case 't-userrights': return 'userGroup';
+			default: return null;
+		}
+	}
+
 	/**
 	 * Revises the labels of the p-tb and p-cactions menus.
 	 *
@@ -63,7 +78,15 @@ class VectorComponentPageTools implements VectorComponent {
 		return array_map( function ( $menu ) {
 			switch ( $menu['id'] ?? '' ) {
 				case self::TOOLBOX_ID:
+					/* UTW change: 'general' is the only label, so let's change it to 'tools'
 					$menu['label'] = $this->localizer->msg( 'vector-page-tools-general-label' )->text();
+					*/
+					$menu['label'] = $this->localizer->msg( 'vector-page-tools-label' )->text();
+					$menu['html-items'] = null;
+					$menu['array-list-items'] = array_map( function ( $item ) {
+						$item['array-links'][0]['icon'] = "{$this->getItemIcon( $item['id'] )}-progressive";
+						return $item;
+					}, $menu['array-items'] );
 					break;
 				case self::ACTIONS_ID:
 					$menu['label'] = $this->localizer->msg( 'vector-page-tools-actions-label' )->text();
