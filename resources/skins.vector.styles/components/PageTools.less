@@ -1,3 +1,4 @@
+/* UTW change: never hide the page tools
 // Ensure there is only 1 page tools landmark at anytime
 .vector-feature-page-tools-pinned-enabled .vector-page-toolbar-container .vector-page-tools-landmark,
 .vector-feature-page-tools-pinned-disabled .vector-column-end .vector-page-tools-landmark {
@@ -18,4 +19,68 @@
 	@media ( max-width: @max-width-breakpoint-mobile ) {
 		display: block;
 	}
+}
+*/
+
+.vector-column-end {
+	background-color: @background-color-neutral;
+	padding: 24px;
+
+	.sidebar-toggle {
+		display: none;
+	}
+
+	.vector-menu {
+		margin-bottom: 20px;
+	}
+
+	.vector-menu-heading {
+		background-image: linear-gradient(to top, @background-color-progressive-subtle 30%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0) 100%);
+		border-bottom: 0;
+		color: @color-base;
+		display: inline-block;
+		font-size: 18px;
+		font-weight: 600;
+		margin: 6px 0;
+		padding: 0 3px;	
+	}
+
+	.mw-list-item a {
+		align-items: center;
+		display: flex;
+		padding: 6px 0;
+	}
+}
+
+@media ( min-width: @min-width-breakpoint-desktop ) {
+	.vector-column-end .sidebar-toggle {
+		background-color: @background-color-progressive-subtle;
+		border: 0;
+		border-top-left-radius: 30%;
+		border-bottom-left-radius: 30%;
+		box-sizing: border-box;
+		display: block;
+		height: 40px;
+		padding: 0;
+		position: absolute;
+		right: 0;
+		width: 50px;
+	
+		&:hover {
+			background-color: @background-color-progressive--hover;
+		}
+	}
+	.vector-feature-page-tools-pinned-clientpref-0 .vector-column-end {
+		padding: 24px 0;
+		width: 20px;
+	
+		.vector-sticky-pinned-container {
+			display: none;
+		}
+	}
+}
+
+.action-edit .vector-column-end,
+.page-Main_Page .vector-column-end {
+	display: none;
 }

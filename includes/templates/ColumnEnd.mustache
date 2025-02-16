@@ -1,11 +1,15 @@
 <div class="vector-column-end no-font-mode-scale">
+	{{#data-sidebar-toggle}}
+	{{>SidebarToggle}}
+	{{/data-sidebar-toggle}}
 	<div class="vector-sticky-pinned-container">
 		<nav class="vector-page-tools-landmark" aria-label="{{msg-vector-page-tools-nav-label}}">
 			{{#data-page-tools}}
-			{{>PinnableContainer/Pinned/Open}}
+			{{! UTW change: not pinnable }}
+			{{! >PinnableContainer/Pinned/Open}}
 				{{! Use `#vector-page-tools-pinned-container .vector-page-tools` to target styles at this element}}
-				{{#is-pinned}}{{>PageTools}}{{/is-pinned}}
-			{{>PinnableContainer/Close}}
+				{{>PageTools}}
+			{{! >PinnableContainer/Close}}
 			{{/data-page-tools}}
 		</nav>
 		<nav class="vector-appearance-landmark" aria-label="{{msg-vector-appearance-label}}">

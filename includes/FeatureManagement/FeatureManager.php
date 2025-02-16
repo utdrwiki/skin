@@ -217,6 +217,7 @@ class FeatureManager {
 				case CONSTANTS::FEATURE_LIMITED_WIDTH:
 				case CONSTANTS::FEATURE_TOC_PINNED:
 				case CONSTANTS::FEATURE_APPEARANCE_PINNED:
+				case CONSTANTS::FEATURE_PAGE_TOOLS_PINNED:
 					$suffixEnabled = 'clientpref-1';
 					$suffixDisabled = 'clientpref-0';
 					break;
@@ -224,7 +225,9 @@ class FeatureManager {
 				// These features have two valid states: enabled and disabled. In future it would be nice if these
 				// were 0 and 1 so that the features.js module cannot be applied to server side only flags.
 				case CONSTANTS::FEATURE_MAIN_MENU_PINNED:
+				/* UTW change: this preference has been repurposed for sidebar hiding
 				case CONSTANTS::FEATURE_PAGE_TOOLS_PINNED:
+				*/
 				// Server side only feature flags.
 				// Note these classes are fixed and cannot be changed at runtime by JavaScript,
 				// only via modification to LocalSettings.php.

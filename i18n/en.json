@@ -81,6 +81,8 @@
 	"vector-2022-beta-preview-description": "Get early access to the new reading accessibility features, such as typography improvements and dark mode.",
 	"utw-back-to-page": "Back to page",
 	"utw-header-categories-in": "in:",
+	"utw-sidebar-hide": "hide sidebar",
+	"utw-sidebar-show": "show sidebar",
 	"vector-night-mode-gadget-names": "dark-mode|dark-mode-toggle|dark-mode-toggle-pagestyles",
 	"vector-night-mode-gadget-warning": "You're using a dark mode gadget that interferes with this feature. [[Special:Preferences#mw-prefsection-gadgets|Disable the gadget]] to use dark mode.",
 	"vector-night-mode-issue-reporting-notice-url": "",

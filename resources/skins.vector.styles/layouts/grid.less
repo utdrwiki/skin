@@ -31,8 +31,12 @@
 		grid-area: footer;
 	}
 
+	/* UTW change: this client preference has been repurposed for sidebar hiding
 	.vector-feature-page-tools-pinned-enabled .vector-column-end,
+	*/
+	.vector-feature-page-tools-pinned-clientpref-1 .vector-column-end,
 	.vector-feature-appearance-pinned-clientpref-1 .vector-column-end {
+		box-sizing: border-box;
 		width: @width-column-desktop;
 	}
 
@@ -95,7 +99,11 @@
 @media ( min-width: @min-width-breakpoint-desktop ) {
 	.mw-body {
 		display: grid;
+		/* UTW change: page content should not be centered when the sidebar is hidden
 		grid-template: ~'min-content min-content min-content 1fr / minmax(0, @{max-width-content-container}) min-content';
+		*/
+		grid-template-columns: 1fr auto;
+		grid-template-rows: min-content min-content min-content 1fr;
 		/**
 		 * NOTE: T327715 - 'titlebar-cx' grid area is a temporary workaround to accommodate
 		 * the Content Translation extension and should not be used beyond that.
@@ -130,10 +138,12 @@
 		}
 	}
 
+	/* UTW change: page already has inner padding
 	.vector-feature-page-tools-pinned-enabled .mw-body,
 	.vector-feature-appearance-pinned-clientpref-1 .mw-body {
 		column-gap: @grid-column-gap;
 	}
+	*/
 
 	.vector-feature-limited-width-clientpref-0 .mw-body,
 	.vector-feature-limited-width-content-disabled .mw-body {
