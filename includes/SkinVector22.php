@@ -17,6 +17,7 @@ use MediaWiki\Skins\Vector\Components\VectorComponentPageTools;
 use MediaWiki\Skins\Vector\Components\VectorComponentPinnableContainer;
 use MediaWiki\Skins\Vector\Components\VectorComponentPrimaryAction;
 use MediaWiki\Skins\Vector\Components\VectorComponentSearchBox;
+use MediaWiki\Skins\Vector\Components\VectorComponentSidebarToggle;
 use MediaWiki\Skins\Vector\Components\VectorComponentStickyHeader;
 use MediaWiki\Skins\Vector\Components\VectorComponentTableOfContents;
 use MediaWiki\Skins\Vector\Components\VectorComponentUserLinks;
@@ -510,6 +511,10 @@ class SkinVector22 extends SkinMustache {
 				$this->msg( VectorComponentMainMenu::ID . '-label' )->text(),
 				VectorComponentMainMenu::ID . '-dropdown' . ' vector-button-flush-left vector-button-flush-right',
 				'menu'
+			),
+			'data-sidebar-toggle' => new VectorComponentSidebarToggle(
+				$localizer,
+				$featureManager
 			),
 			'data-page-tools' => new VectorComponentPageTools(
 				/* UTW change: page tools now go to the edit dropdown
