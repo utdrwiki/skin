@@ -15,6 +15,7 @@ function save( feature, enabled ) {
 			case 'toc-pinned':
 			case 'limited-width':
 			case 'appearance-pinned':
+			case 'page-tools-pinned':
 				// Save the setting under the new system
 				mw.user.clientPrefs.set( `vector-feature-${ feature }`, enabled ? '1' : '0' );
 				break;

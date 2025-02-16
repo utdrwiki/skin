@@ -167,7 +167,9 @@
 
 		.vector-sticky-pinned-container {
 			top: ~'calc( @{height-header} + @{grid-row-gap} )';
+			/* UTW change: this causes the sidebar to overflow
 			max-height: ~'calc( 100vh - @{height-header} - (@{grid-row-gap} * 2) )';
+			*/
 		}
 
 		// - T289817 `.mw-sticky-header-element` provides an API for template developers
