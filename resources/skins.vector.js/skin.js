@@ -10,6 +10,7 @@ const languageButton = require( './languageButton.js' ),
 	userPreferences = require( './userPreferences.js' ),
 	sidebarToggle = require( './sidebarToggle.js' ),
 	siteNotice = require( './siteNotice.js' ),
+	mobileNavigation = require(  './mobileNavigation.js' ),
 	{ isNightModeGadgetEnabled, disableNightModeForGadget, alterExclusionMessage, removeBetaNotice } = require( './disableNightModeIfGadget.js' ),
 	teleportTarget = /** @type {HTMLElement} */require( /** @type {string} */ ( 'mediawiki.page.ready' ) ).teleportTarget;
 
@@ -106,6 +107,7 @@ function main( window ) {
 	tables();
 	sidebarToggle();
 	siteNotice();
+	mobileNavigation();
 	// UTW change: cross-wiki login script
 	if ( mw.config.get( 'wgCanonicalSpecialPageName' ) === 'Userlogin' ) {
 		require( './login.js' )();
