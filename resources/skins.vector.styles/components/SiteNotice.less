@@ -1,12 +1,60 @@
 /** element that wraps a notice that comes from wiki page */
+/* UTW change: we don't need this margin
 #localNotice {
 	margin-bottom: 0.9em;
 }
+*/
 
 /* Site Notice (includes notices from CentralNotice extension) */
+/* UTW change: we don't need any of these changes
 #siteNotice {
 	font-size: @font-size-site-notice;
 	margin: @grid-row-gap 0;
 	position: relative;
 	text-align: center;
+}
+*/
+#siteNotice {
+	background-color: @background-color-neutral;
+	border-left: 5px solid @border-color-progressive;
+	font-size: @font-size-site-notice;
+	position: fixed;
+	left: 20px;
+	bottom: 20px;
+	z-index: 101;
+	margin: 0;
+
+	.mw-dismissable-notice {
+		max-width: 400px;
+		padding: 10px;
+
+		.mw-dismissable-notice-close {
+			padding: 4px;
+
+			a {
+				color: @color-base;
+				font-size: 24px;
+
+				&:hover, &:focus {
+					text-decoration: none;
+				}
+			}
+		}
+
+		.mw-dismissable-notice-body {
+			margin: 0;
+		}
+	}
+}
+
+@media ( max-width: @max-width-breakpoint-mobile ) {
+	#siteNotice {
+		bottom: 0;
+		left: 0;
+		width: 100%;
+
+		.mw-dismissable-notice {
+			max-width: unset;
+		}
+	}
 }
