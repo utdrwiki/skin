@@ -457,6 +457,7 @@
 				"resources/skins.vector.js/menuTabs.js",
 				"resources/skins.vector.js/login.js",
 				"resources/skins.vector.js/sidebarToggle.js",
+				"resources/skins.vector.js/siteNotice.js",
 				"resources/skins.vector.js/disableNightModeIfGadget.js"
 			],
 			"dependencies": [
