@@ -1,0 +1,28 @@
+// Mobile navigation styles
+.mobile-navigation:not(.shown), .mobile-navigation-show {
+	display: none;
+}
+
+.vector-header-container .mobile-navigation .vector-menu {
+	.vector-menu-content {
+		background-color: transparent;
+		box-shadow: none;
+		position: static;
+		width: 100%;
+
+		li a {
+			color: @color-inverted-fixed;
+		}
+	}
+
+	// Hover behavior is weird on mobile
+	&:hover:not(.shown) .vector-menu-content {
+		display: none;
+	}
+}
+
+@media ( max-width: @max-width-breakpoint-tablet ) {
+	.mobile-navigation-show {
+		display: block;
+	}
+}
