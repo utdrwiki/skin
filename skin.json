@@ -323,6 +323,7 @@
 				"next",
 				"previous",
 				"specialPages",
+				"speechBubble",
 				"speechBubbles",
 				"speechBubbleAdd",
 				"upload",
@@ -574,6 +575,10 @@
 		]
 	},
 	"config": {
+		"VectorDiscussionsLink": {
+			"value": null,
+			"description": "@var ?string Link to the wiki's discussion page to be shown in the header."
+		},
 		"VectorWrapTablesTemporary": {
 			"value": false,
 			"description": "@var bool temporary config variable for controlling role out of tables. When enabled certain tables will be wrapped with a div"
