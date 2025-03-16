@@ -438,6 +438,19 @@ class SkinVector22 extends SkinMustache {
 			$newNavbar,
 		);
 
+		$discussionsLink = $config->get( 'VectorDiscussionsLink' );
+		$discussionsButton = $discussionsLink ? new VectorComponentButton(
+			$this->msg( 'utw-discussions-button' )->text(),
+			'speechBubble',
+			null,
+			'discussions-button',
+			[],
+			'quiet',
+			'default',
+			true,
+			$discussionsLink,
+		) : null;
+
 		$components = $tocComponents + [
 			/* UTW change: edit button rework
 			'data-add-topic-button' => $hasAddTopicButton ? new VectorComponentButton(
@@ -491,6 +504,7 @@ class SkinVector22 extends SkinMustache {
 				$localizer
 			),
 			'data-main-menu' => $mainMenu,
+			'data-discussions-button' => $discussionsButton,
 			'data-main-menu-dropdown' => new VectorComponentDropdown(
 				VectorComponentMainMenu::ID . '-dropdown',
 				$this->msg( VectorComponentMainMenu::ID . '-label' )->text(),
