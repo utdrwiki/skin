@@ -1,0 +1,40 @@
+li.gallerybox div.thumb {
+	background-color: inherit;
+	border: 0;
+
+	img {
+		border: 1px solid @border-color-base;
+		image-rendering: pixelated;
+	}
+}
+
+figure[typeof~='mw:File/Thumb'] > :not(figcaption) .mw-file-element:not(.mw-broken-media),
+figure[typeof~='mw:File/Frame'] > :not(figcaption) .mw-file-element:not(.mw-broken-media),
+figure[typeof~='mw:File/Thumb'],
+figure[typeof~='mw:File/Frame'],
+figure[typeof~='mw:File/Thumb'] > figcaption,
+figure[typeof~='mw:File/Frame'] > figcaption {
+	background-color: transparent;
+	border: 0;
+}
+
+@media ( max-width: @max-width-breakpoint-mobile ) {
+	.mw-content-ltr figure[typeof~='mw:File/Thumb'],
+	.mw-content-ltr figure[typeof~='mw:File/Frame'] {
+		width: 100%;
+	}
+}
+
+.mw-file-description::after {
+	display: none;
+}
+
+.mw-default-size,
+figure[typeof~='mw:File/Thumb'] {
+	min-width: 100px;
+}
+
+.mw-content-ltr figure[typeof~='mw:File/Thumb'] > .mw-file-description::after,
+.mw-content-ltr figure[typeof~='mw:File/Thumb'] > .mw-file-magnify::after {
+	background-image: none;
+}
