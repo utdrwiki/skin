@@ -20,4 +20,11 @@ class HookRunner implements VectorSearchResourceLoaderConfigHook {
 			[ &$vectorSearchConfig ]
 		);
 	}
+
+	public function onTalkPageLinkResolve( array &$linkAttributes ): void {
+		$this->hookContainer->run(
+			'TalkPageLinkResolve',
+			args: [ &$linkAttributes ]
+		);
+	}
 }
