@@ -24,9 +24,11 @@ use MediaWiki\Skins\Vector\Components\VectorComponentStickyHeader;
 use MediaWiki\Skins\Vector\Components\VectorComponentTableOfContents;
 use MediaWiki\Skins\Vector\Components\VectorComponentUserLinks;
 use MediaWiki\Skins\Vector\Components\VectorComponentVariants;
+use MediaWiki\Skins\Vector\Components\VectorComponentTalkLink;
 use MediaWiki\Skins\Vector\FeatureManagement\FeatureManager;
 use MediaWiki\Skins\Vector\FeatureManagement\FeatureManagerFactory;
 use MediaWiki\Skins\Vector\NavParser;
+use MediaWiki\Skins\Vector\Hooks\HookRunner;
 use RuntimeException;
 
 /**
@@ -349,6 +351,27 @@ class SkinVector22 extends SkinMustache {
 		}
 	}
 
+	final protected function resolveTalkLink(): array {
+		if ( !$this->canUseWikiPage() ) {
+			return [ 'href' => null ];
+		}
+		$wikiPage = $this->getWikiPage();
+		$ns = $wikiPage->getNamespace();
+		$title = $wikiPage->getTitle();
+
+		$linkAttributes = [
+			'href' => $title->getTalkPageIfDefined()?->getFullURL(),
+			'ns' => $ns,
+			'title' => $title,
+			'rel' => 'nofollow',
+		];
+
+		$hookRunner = new HookRunner( MediaWikiServices::getInstance()->getHookContainer() );
+		$hookRunner->onTalkPageLinkResolve( $linkAttributes );
+
+		return $linkAttributes;
+	} 
+
 	/**
 	 * @return array
 	 */
@@ -462,6 +485,8 @@ class SkinVector22 extends SkinMustache {
 			$discussionsLink,
 		) : null;
 
+		$talkLinkAttributes = $this->resolveTalkLink();
+
 		$components = $tocComponents + [
 			/* UTW change: edit button rework
 			'data-add-topic-button' => $hasAddTopicButton ? new VectorComponentButton(
@@ -476,6 +501,13 @@ class SkinVector22 extends SkinMustache {
 				$title->getLocalURL( [ 'action' => 'edit', 'section' => 'new' ] )
 			) : null,
 			*/
+			'data-talk-page-link' => $talkLinkAttributes['href'] ? new VectorComponentTalkLink(
+				$talkLinkAttributes['href'],
+				$this->msg('utw-talk-page')->text(),
+				'utw-talk-page-link',
+				'speechBubble',
+				$talkLinkAttributes['rel'] ?? null,
+			) : null,
 			'data-primary-action' => new VectorComponentPrimaryAction(
 				$this->primaryAction,
 				$portlets['data-actions']
