@@ -18,22 +18,26 @@ class VectorComponentAppearance implements VectorComponent {
 
 	/** @var string */
 	public const ID = 'vector-appearance';
+	public $id;
 
 	public function __construct(
 		MessageLocalizer $localizer,
-		FeatureManager $featureManager
+		FeatureManager $featureManager,
+		string $id = self::ID,
 	) {
 		$this->localizer = $localizer;
 		// FIXME: isPinned is no longer accurate because the appearance menu uses client preferences
 		$this->isPinned = $featureManager->isFeatureEnabled( Constants::FEATURE_APPEARANCE_PINNED );
+		$this->id = $id;
 	}
 
 	/**
 	 * @inheritDoc
 	 */
 	public function getTemplateData(): array {
-		$pinnedContainer = new VectorComponentPinnableContainer( self::ID, $this->isPinned );
-		$pinnableElement = new VectorComponentPinnableElement( self::ID );
+		$pinnedContainer = new VectorComponentPinnableContainer( $this->id, $this->isPinned );
+		$pinnableElement = new VectorComponentPinnableElement( $this->id );
+		/* UTW change: we don't have 'pinning'
 		$pinnableHeader = new VectorComponentPinnableHeader(
 			$this->localizer,
 			$this->isPinned,
@@ -42,6 +46,7 @@ class VectorComponentAppearance implements VectorComponent {
 			// Feature name
 			'appearance-pinned'
 		);
+		*/
 
 		$data = $pinnableElement->getTemplateData() +
 			$pinnedContainer->getTemplateData();

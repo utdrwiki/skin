@@ -68,7 +68,7 @@ function main( window ) {
 	teleportTarget.classList.add( 'vector-body' );
 
 	// Load client preferences
-	const appearanceMenuSelector = '#vector-appearance';
+	const appearanceMenuSelector = '#vector-appearance,#vector-appearance-sticky';
 	const appearanceMenuExists = document.querySelectorAll( appearanceMenuSelector ).length > 0;
 	if ( appearanceMenuExists ) {
 		mw.loader.using( [

@@ -564,6 +564,7 @@ class SkinVector22 extends SkinMustache {
 				VectorComponentPageTools::ID . '-dropdown',
 			),
 			'data-appearance' => new VectorComponentAppearance( $localizer, $featureManager ),
+			'data-appearance-sticky' => new VectorComponentAppearance( $localizer, $featureManager, 'vector-appearance-sticky' ),
 			'data-appearance-dropdown' => new VectorComponentDropdown(
 				'vector-appearance-dropdown',
 				$this->msg( 'vector-appearance-label' )->text(),
@@ -571,6 +572,15 @@ class SkinVector22 extends SkinMustache {
 				'appearance',
 				Html::expandAttributes( [
 					'title' => $this->msg( 'vector-appearance-tooltip' )->text(),
+				] )
+			),
+			'data-appearance-dropdown-sticky' => new VectorComponentDropdown(
+				'vector-appearance-dropdown-sticky',
+				$this->msg( 'vector-appearance-label' )->text(),
+				'',
+				'appearance',
+				Html::expandAttributes( [
+					'title' => $this->msg( 'vector-appearance-tooltip' ),
 				] )
 			),
 			'data-categories' => new VectorComponentCategories(

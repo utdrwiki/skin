@@ -66,6 +66,11 @@ function toggleDocClassAndSave( featureName, value, config, userPreferences ) {
 		// before adding the new class.
 		config[ featureName ].options.forEach( ( possibleValue ) => {
 			document.documentElement.classList.remove( `${ featureName }-clientpref-${ possibleValue }` );
+
+			const radioButtons = document.querySelectorAll( `#skin-client-pref-${ featureName }-value-${ possibleValue }` );
+			radioButtons.forEach( radioButton => {
+				radioButton.checked = possibleValue === value;
+			} );
 		} );
 		document.documentElement.classList.add( `${ featureName }-clientpref-${ value }` );
 		// Client preferences often change the layout of the page significantly, so emit
@@ -352,15 +357,16 @@ function makeControl( featureName, config, userPreferences ) {
  * @param {string} featureName
  * @param {Record<string,ClientPreference>} config
  * @param {UserPreferencesApi} userPreferences
+ * @param {number} index
  */
-function makeClientPreference( parent, featureName, config, userPreferences ) {
+function makeClientPreference( parent, featureName, config, userPreferences, index ) {
 	const labelMsg = getFeatureLabelMsg( featureName );
 	// If the user is not debugging messages and no language exists,
 	// exit as its a hidden client preference.
 	if ( !labelMsg.exists() && mw.config.get( 'wgUserLanguage' ) !== 'qqx' ) {
 		return;
 	} else {
-		const id = `skin-client-prefs-${ featureName }`;
+		const id = `skin-client-prefs-${ featureName }-${ index }`;
 		// @ts-ignore TODO: upstream patch URL
 		const portlet = mw.util.addPortlet( id, labelMsg.text() );
 
@@ -433,17 +439,21 @@ function makeClientPreference( parent, featureName, config, userPreferences ) {
  * @return {Promise<Node>}
  */
 function render( selector, config, userPreferences ) {
+	/* UTW change: we can have multiple client preference elements
 	const node = document.querySelector( selector );
 	if ( !node ) {
+	*/
+	const nodes = document.querySelectorAll( selector );
+	if ( nodes.length <= 0 ) {
 		return Promise.reject();
 	}
 	return new Promise( ( resolve ) => {
 		getVisibleClientPreferences( config ).forEach( ( pref ) => {
 			userPreferences = userPreferences || new mw.Api();
-			makeClientPreference( node, pref, config, userPreferences );
+			nodes.forEach( ( node, i ) => makeClientPreference( node, pref, config, userPreferences, i ) );
 		} );
 		mw.requestIdleCallback( () => {
-			resolve( node );
+			resolve( nodes );
 		} );
 	} );
 }
