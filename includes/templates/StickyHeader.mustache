@@ -48,6 +48,18 @@
 			{{#array-buttons}}
 			{{>Button}}
 			{{/array-buttons}}
+			{{#data-vector-user-links}}
+				<nav class="vector-appearance-landmark" aria-label="{{msg-vector-appearance-label}}">
+					{{#data-appearance-dropdown-sticky}}{{>Dropdown/Open}}{{/data-appearance-dropdown-sticky}}
+					{{#data-appearance-sticky}}
+						{{>PinnableContainer/Unpinned/Open}}
+						{{! Use `#vector-appearance-unpinned-container .vector-appearance` to target styles at this element}}
+						{{^is-pinned}}{{>Appearance}}{{/is-pinned}}
+						{{>PinnableContainer/Close}}
+					{{/data-appearance-sticky}}
+					{{#data-appearance-dropdown-sticky}}{{>Dropdown/Close}}{{/data-appearance-dropdown-sticky}}
+				</nav>
+			{{/data-vector-user-links}}
 		</div>
 		<div class="vector-sticky-header-icon-end">
 			<div class="vector-user-links">
