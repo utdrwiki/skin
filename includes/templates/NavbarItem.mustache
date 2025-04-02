@@ -1,0 +1,10 @@
+<div id="{{id}}" class="vector-menu mw-portlet mw-portlet-navigation">
+	<div class="vector-menu-heading">
+		<a href="{{href}}"{{#rel}} rel="{{.}}"{{/rel}}{{#target}} target="{{.}}"{{/target}}>{{text}}</a>
+	</div>
+	<div class="vector-menu-content">
+		<ul class="vector-menu-content-list">
+			{{#items}}{{>NavbarSubitem}}{{/items}}
+		</ul>
+	</div>
+</div>

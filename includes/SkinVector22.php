@@ -26,6 +26,7 @@ use MediaWiki\Skins\Vector\Components\VectorComponentTalkLink;
 use MediaWiki\Skins\Vector\FeatureManagement\FeatureManager;
 use MediaWiki\Skins\Vector\FeatureManagement\FeatureManagerFactory;
 use MediaWiki\Skins\Vector\Hooks\HookRunner;
+use MediaWiki\Skins\Vector\NavParser;
 use RuntimeException;
 use SkinMustache;
 use SkinTemplate;
@@ -46,6 +47,8 @@ class SkinVector22 extends SkinMustache {
 	private FeatureManagerFactory $featureManagerFactory;
 	private ?FeatureManager $featureManager = null;
 
+	private NavParser $navParser;
+
 	public function __construct(
 		LanguageConverterFactory $languageConverterFactory,
 		FeatureManagerFactory $featureManagerFactory,
@@ -55,6 +58,7 @@ class SkinVector22 extends SkinMustache {
 		$this->languageConverterFactory = $languageConverterFactory;
 		// Cannot use the context in the constructor, setContext is called after construction
 		$this->featureManagerFactory = $featureManagerFactory;
+		$this->navParser = new NavParser($this);
 	}
 
 	/**
@@ -462,6 +466,8 @@ class SkinVector22 extends SkinMustache {
 		$userPage = $isRegistered ? $this->buildPersonalPageItem() : [];
 		*/
 		$userPage = $this->buildPersonalPageItem();
+
+		$newNavbar = $this->navParser->parseNavbar();
 		$mainMenu = new VectorComponentMainMenu(
 			$sidebar,
 			$portlets['data-languages'] ?? [],
@@ -469,6 +475,7 @@ class SkinVector22 extends SkinMustache {
 			$user,
 			$featureManager,
 			$this,
+			$newNavbar,
 		);
 
 		$discussionsLink = $config->get( 'VectorDiscussionsLink' );

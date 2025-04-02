@@ -132,11 +132,45 @@
 			transform: scaleY(-1);
 			padding-left: 10px;
 		}
+
+		a:visited {
+			color: inherit;
+		}
+
+		a:hover {
+			color: inherit;
+		}
 	}
 
 	&:not(:hover) {
 		.vector-menu-heading::after {
 			transform: none;
+		}
+	}
+	
+	.utw-navbar-subitem {
+		a.utw-navbar-subitem-link {
+
+			display: flex;
+			justify-content: space-between;
+
+			.vector-icon {
+				mask-size: 1em;
+				background-color: @color-subtle;
+				margin-left: 18px;
+			}
+		}
+
+		& > div.utw-navbar-subitem-collapsable {
+			display: none;
+
+			position: absolute;
+			left: 100%;
+			top: 0;
+		}
+
+		&:hover > div.utw-navbar-subitem-collapsable {
+			display: block;
 		}
 	}
 
