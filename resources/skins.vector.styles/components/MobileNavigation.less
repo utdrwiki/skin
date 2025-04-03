@@ -15,6 +15,10 @@
 		}
 	}
 
+	.utw-navbar-subitem > div.utw-navbar-subitem-collapsable {
+		position: initial;
+	}
+
 	// Hover behavior is weird on mobile
 	&:hover:not(.shown) .vector-menu-content {
 		display: none;
@@ -24,5 +28,13 @@
 @media ( max-width: @max-width-breakpoint-tablet ) {
 	.mobile-navigation-show {
 		display: block;
+	}
+}
+
+// Don't allow clicking on parent links when using a touch device.
+@media ( pointer: coarse ) {
+	.mobile-navigation .vector-menu-heading a,
+	.utw-navbar-subitem.utw-navbar-parent > .utw-navbar-subitem-link {
+		pointer-events: none;
 	}
 }

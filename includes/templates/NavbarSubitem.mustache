@@ -1,4 +1,4 @@
-<li id="{{id}}" class="mw-list-item utw-navbar-subitem">
+<li id="{{id}}" class="mw-list-item utw-navbar-subitem {{ #hasItems }}utw-navbar-parent{{ /hasItems }}">
 	<a class="utw-navbar-subitem-link" href="{{href}}"{{#rel}} rel="{{.}}"{{/rel}}{{#target}} target="{{.}}"{{/target}}>
 		<span>{{text}}</span>
 		{{ #hasItems }} <span class="vector-icon mw-ui-icon-next mw-ui-icon-wikimedia-next"></span> {{ /hasItems }}

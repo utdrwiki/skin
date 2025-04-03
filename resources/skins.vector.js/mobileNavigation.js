@@ -11,6 +11,9 @@ function init() {
 			mobileNav.appendChild(menu);
 		}
 	}
+	for (const node of document.querySelectorAll('.utw-navbar-parent')) {
+		node.addEventListener('click', event => event.currentTarget.classList.toggle('shown'));
+	}
 	for (const node of document.getElementsByClassName('mobile-navigation-show-toggle')) {
 		node.addEventListener('click', () => {
 			for (const mobileNav of mobileNavs) {
