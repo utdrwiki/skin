@@ -150,7 +150,6 @@
 	
 	.utw-navbar-subitem {
 		a.utw-navbar-subitem-link {
-
 			display: flex;
 			justify-content: space-between;
 
@@ -159,6 +158,8 @@
 				background-color: @color-subtle;
 				margin-left: 18px;
 			}
+
+			margin-right: 4px;
 		}
 
 		& > div.utw-navbar-subitem-collapsable {
@@ -200,6 +201,10 @@
 
 		ul {
 			padding: 4px;
+
+			&.utw-navbar-menu {
+				padding-right: 0;
+			}
 		}
 
 		li {
