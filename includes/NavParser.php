@@ -135,6 +135,7 @@ class NavParser {
 
 				$navItems[] = $newNavItem;
 			} else {
+				$navItems[] = $newNavItem;
 				$cursor++;
 			}
 		}
