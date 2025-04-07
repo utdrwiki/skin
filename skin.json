@@ -463,6 +463,7 @@
 				"resources/skins.vector.js/sidebarToggle.js",
 				"resources/skins.vector.js/siteNotice.js",
 				"resources/skins.vector.js/mobileNavigation.js",
+				"resources/skins.vector.js/tracking.js",
 				"resources/skins.vector.js/disableNightModeIfGadget.js"
 			],
 			"dependencies": [
