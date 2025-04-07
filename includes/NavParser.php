@@ -47,7 +47,9 @@ class NavParser {
 
 		$linkAttributes = [];
 
-		if (preg_match('/^(?i:' . $urlUtils->validProtocols() . ')/', $link)) {
+		if ($link === '-') {
+			$link = null;
+		} else if (preg_match('/^(?i:' . $urlUtils->validProtocols() . ')/', $link)) {
 			if (
 				$config->get(MainConfigNames::NoFollowLinks) &&
 				!$urlUtils->matchesDomainList(
@@ -63,7 +65,7 @@ class NavParser {
 			}
 		} else {
 			$linkTitle = Title::newFromText($link);
-			$link = $linkTitle ? $linkTitle->fixSpecialName()->getLinkURL() : '';
+			$link = $linkTitle ? $linkTitle->fixSpecialName()->getLinkURL() : null;
 		}
 
 		return array_merge([
