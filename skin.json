@@ -203,7 +203,8 @@
 		"GetPreferences": "VectorHooks",
 		"LocalUserCreated": "VectorHooks",
 		"SkinPageReadyConfig": "VectorHooks",
-		"GetBetaFeaturePreferences": "VectorHooks"
+		"GetBetaFeaturePreferences": "VectorHooks",
+		"BeforePageDisplay": "VectorHooks"
 	},
 	"@note": "When modifying skins.vector.styles definition, make sure the installer still works",
 	"ResourceModules": {
@@ -596,8 +597,16 @@
 				"exclude": {
 					"mainpage": false,
 					"pagetitles": [],
-					"namespaces": [ -1, 6, 14, 100, 710 ],
-					"querystring": { "action": "info|protect|delete|undelete|action|history" }
+					"namespaces": [
+						-1,
+						6,
+						14,
+						100,
+						710
+					],
+					"querystring": {
+						"action": "info|protect|delete|undelete|action|history"
+					}
 				},
 				"include": []
 			},
