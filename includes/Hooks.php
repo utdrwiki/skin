@@ -6,6 +6,8 @@ use MediaWiki\Auth\Hook\LocalUserCreatedHook;
 use MediaWiki\Config\Config;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Output\Hook\BeforePageDisplayHook;
+use MediaWiki\Output\OutputPage;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\ResourceLoader as RL;
 use MediaWiki\Skin\SkinTemplate;
@@ -26,7 +28,8 @@ use MediaWiki\User\User;
 class Hooks implements
 	GetPreferencesHook,
 	LocalUserCreatedHook,
-	SkinPageReadyConfigHook
+	SkinPageReadyConfigHook,
+	BeforePageDisplayHook
 {
 	public function __construct(
 		private readonly Config $config,
@@ -623,5 +626,35 @@ class Hooks implements
 			'info-link' => 'https://www.mediawiki.org/wiki/Special:MyLanguage/Reading/Web/Accessibility_for_reading',
 			'discussion-link' => 'https://www.mediawiki.org/wiki/Talk:Reading/Web/Accessibility_for_reading',
 		];
+	}
+
+	private static function getPreloadFonts(): array {
+		return [
+			'/skins/UTVector/resources/skins.vector.styles/images/rubik-regular.woff2?25ad9',
+			'/skins/UTVector/resources/skins.vector.styles/images/rubik-300.woff2?3cc3b',
+			'/skins/UTVector/resources/skins.vector.styles/images/rubik-300italic.woff2?930a1',
+			'/skins/UTVector/resources/skins.vector.styles/images/rubik-italic.woff2?95a59',
+			'/skins/UTVector/resources/skins.vector.styles/images/rubik-500.woff2?fcabb',
+			'/skins/UTVector/resources/skins.vector.styles/images/rubik-500italic.woff2?e59de',
+			'/skins/UTVector/resources/skins.vector.styles/images/rubik-700.woff2?d28fb',
+			'/skins/UTVector/resources/skins.vector.styles/images/rubik-700italic.woff2?8ad19',
+		];
+	}
+
+	/**
+	 * Schedule fonts for preload to avoid LCS.
+	 *
+	 * @param OutputPage $out
+	 * @param \Skin $skin
+	 */
+	public function onBeforePageDisplay( $out, $skin ): void {
+		foreach ( $this->getPreloadFonts() as $fontHref ) {
+			$out->addLink([
+				'rel' => 'preload',
+				'href' => $fontHref,
+				'as' => 'font',
+				'crossorigin' => 'anonymous'
+			]);
+		}
 	}
 }

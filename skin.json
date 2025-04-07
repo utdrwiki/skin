@@ -194,6 +194,7 @@
 		}
 	},
 	"Hooks": {
+		"BeforePageDisplay": "VectorHooks",
 		"CentralAuthIsUIReloadRecommended": "VectorCentralAuthHooks",
 		"GetPreferences": "VectorHooks",
 		"LocalUserCreated": "VectorHooks",
