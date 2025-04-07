@@ -203,7 +203,8 @@
 		"GetPreferences": "VectorHooks",
 		"LocalUserCreated": "VectorHooks",
 		"SkinPageReadyConfig": "VectorHooks",
-		"GetBetaFeaturePreferences": "VectorHooks"
+		"GetBetaFeaturePreferences": "VectorHooks",
+		"BeforePageDisplay": "VectorHooks"
 	},
 	"@note": "When modifying skins.vector.styles definition, make sure the installer still works",
 	"ResourceModules": {
