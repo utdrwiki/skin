@@ -55,10 +55,12 @@ class VectorComponentVariants implements VectorComponent {
 			'vector-variants-dropdown',
 			$this->getDropdownLabel(),
 			// Hide dropdown if menu is empty
-			$this->menuData[ 'is-empty' ] ? 'emptyPortlet' : ''
+			$this->menuData[ 'is-empty' ] ? 'emptyPortlet' : '',
+			'language-progressive',
 		);
 		$dropdownData = $dropdown->getTemplateData();
 		$dropdownData['aria-label'] = $this->ariaLabel;
+		$dropdownData['label-class'] = 'cdx-button cdx-button--fake-button cdx-button--fake-button--enabled cdx-button--weight-quiet cdx-button--action-progressive';
 		return $dropdownData;
 	}
 
