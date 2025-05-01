@@ -541,6 +541,7 @@ class SkinVector22 extends SkinMustache {
 				$ulsLabels['aria-label'],
 				$langButtonClass,
 				count( $this->getLanguagesCached() ),
+				!$portlets['data-variants']['is-empty'],
 				$langData['html-items'] ?? '',
 				$langData['html-before-portal'] ?? '',
 				$langData['html-after-portal'] ?? '',

@@ -15,6 +15,8 @@ class VectorComponentLanguageDropdown implements VectorComponent {
 	private $class;
 	/** @var int */
 	private $numLanguages;
+	/** @var bool */
+	private $hasVariants;
 	/** @var array */
 	private $menuContentsData;
 	/** @var Title|null */
@@ -25,6 +27,7 @@ class VectorComponentLanguageDropdown implements VectorComponent {
 	 * @param string $ariaLabel label for accessibility
 	 * @param string $class of the dropdown component
 	 * @param int $numLanguages
+	 * @param bool $hasVariants
 	 * @param string $itemHTML the HTML of the list e.g. `<li>...</li>`
 	 * @param string $beforePortlet no known usages. Perhaps can be removed in future
 	 * @param string $afterPortlet used by Extension:ULS
@@ -32,6 +35,8 @@ class VectorComponentLanguageDropdown implements VectorComponent {
 	 */
 	public function __construct(
 		string $label, string $ariaLabel, string $class, int $numLanguages,
+		// UTW change
+		bool $hasVariants,
 		// @todo: replace with >MenuContents class.
 		string $itemHTML, string $beforePortlet = '', string $afterPortlet = '', $title = null
 	) {
@@ -39,6 +44,7 @@ class VectorComponentLanguageDropdown implements VectorComponent {
 		$this->ariaLabel = $ariaLabel;
 		$this->class = $class;
 		$this->numLanguages = $numLanguages;
+		$this->hasVariants = $hasVariants;
 		$this->menuContentsData = [
 			'html-items' => $itemHTML,
 			'html-before-portal' => $beforePortlet,
@@ -68,6 +74,10 @@ class VectorComponentLanguageDropdown implements VectorComponent {
 			$labelClass = $buttonClasses . ' cdx-button--action-progressive'
 				. ' mw-portlet-lang-heading-' . strval( $this->numLanguages );
 			$checkboxClass = 'mw-interlanguage-selector';
+		}
+		// UTW change: use a globe icon on wikis with variants
+		if ( $this->hasVariants ) {
+			$icon = str_replace( 'language', 'globe', $icon );
 		}
 		$dropdown = new VectorComponentDropdown( 'p-lang-btn', $this->label, $this->class );
 		$dropdownData = $dropdown->getTemplateData();
