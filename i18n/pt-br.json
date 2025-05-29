@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"!Silent",
+			"Cacagibin",
 			"555",
 			"Cainamarques",
 			"Diego Queiroz",
@@ -102,6 +103,12 @@
 	"vector-appearance-unpinned-popup": "O menu de aparência foi movido para cá.",
 	"vector-2022-beta-preview-label": "Acessibilidade para Leitura (Vector 2022)",
 	"vector-2022-beta-preview-description": "Obtenha acesso antecipado às novas funcionalidades de acessibilidade de leitura, como melhorias na tipografia e no modo escuro.",
+	"utw-back-to-page": "Voltar para a página",
+	"utw-header-categories-in": "em:",
+	"utw-sidebar-hide": "esconder barra lateral",
+	"utw-sidebar-show": "mostrar barra lateral",
+	"utw-discussions-button": "Discussões",
+	"utw-talk-page": "Discussão",
 	"vector-night-mode-gadget-warning": "Você está usando um gadget de modo escuro que interfere nesta funcionalidade. [[Special:Preferences#mw-prefsection-gadgets|Desative o gadget]] para usar o modo escuro.",
 	"vector-night-mode-issue-reporting-notice-tooltip": "Relate quando as cores do modo escuro dificultarem a leitura.",
 	"vector-night-mode-issue-reporting-link-label": "Relatar um problema com o modo escuro",
