@@ -156,6 +156,10 @@
 			}
 
 			margin-right: 4px;
+
+			span {
+				align-content: center;
+			}
 		}
 
 		& > div.utw-navbar-subitem-collapsable {
@@ -163,7 +167,7 @@
 
 			position: absolute;
 			left: 100%;
-			top: 0;
+			top: -10px;
 		}
 
 		&:hover, &.shown {
@@ -213,6 +217,24 @@
 
 			&:first-child {
 				margin-top: 6px;
+			}
+
+			&:last-child {
+				margin-bottom: 6px;
+			}
+
+			&.utw-navbar-parent {
+				position: relative;
+				padding-right: 0;
+
+				a.utw-navbar-subitem-link {
+					margin-right: 0;
+					padding-right: 10px;
+				}
+
+				.utw-navbar-menu {
+					padding-right: 4px;
+				}
 			}
 
 			a {
