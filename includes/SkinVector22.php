@@ -517,7 +517,7 @@ class SkinVector22 extends SkinMustache {
 				$this->msg('utw-talk-page')->text(),
 				'utw-talk-page-link',
 				'speechBubble',
-				$talkLinkAttributes['rel'],
+				$talkLinkAttributes['rel'] ?? null,
 			) : null,
 			'data-primary-action' => new VectorComponentPrimaryAction(
 				$this->primaryAction,
