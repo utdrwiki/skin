@@ -25,6 +25,11 @@ pre,
 	line-height: @line-height-code;
 }
 
+// UTW change: make <code> responsive
+code {
+	word-break: break-all;
+}
+
 .mw-jump-link:not( :focus ) {
 	.mixin-screen-reader-text;
 	.user-select( none );
@@ -204,4 +209,10 @@ pre,
 .vector-body {
 	font-size: var( --font-size-medium );
 	line-height: var( --line-height-medium );
+}
+
+// UTW change: the margin on ordered lists was too big.
+ol {
+	margin-left: 2em;
+	margin-inline-start: 2em;
 }
