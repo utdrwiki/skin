@@ -7,6 +7,7 @@ use MediaWiki\Skin\SkinMustache;
 use MediaWiki\Skin\SkinTemplate;
 use MediaWiki\Skins\Vector\Components\VectorComponentSearchBox;
 use MediaWiki\Skins\Vector\Components\VectorComponentVariants;
+use MediaWiki\Skins\Vector\FeatureManagement\FeatureManagerFactory;
 
 /**
  * @ingroup Skins
@@ -23,6 +24,7 @@ class SkinVectorLegacy extends SkinMustache {
 	private const MENU_TYPE_PORTAL = 3;
 
 	public function __construct(
+		private readonly FeatureManagerFactory $featureManagerFactory,
 		private readonly LanguageConverterFactory $languageConverterFactory,
 		array $options
 	) {
@@ -191,5 +193,12 @@ class SkinVectorLegacy extends SkinMustache {
 		// This shouldn't be run on SkinVector22.
 		unset( $parentData['data-toc'] );
 		return $parentData;
+	}
+
+	public function getHtmlElementAttributes() {
+		$original = parent::getHtmlElementAttributes();
+		$featureManager = $this->featureManagerFactory->createFeatureManager( $this->getContext() );
+		$original['class'] .= ' ' . implode( ' ', $featureManager->getFeatureBodyClass() );
+		return $original;
 	}
 }

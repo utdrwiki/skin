@@ -25,9 +25,12 @@
 
 	li {
 		// Tab fade background: Fade inside from light grey to white.
+		/* UTDR change: use CSS variables
 		background-image: linear-gradient( to top, @border-color-content--tabs-inactive 0, #e8f2f8 1px, #fff 100% );
 		background-position: left bottom;
 		background-repeat: repeat-x;
+		*/
+		background-color: @background-color-neutral;
 		float: left;
 		display: block;
 		height: 100%;
@@ -62,7 +65,10 @@
 
 	.selected {
 		// Overwrite above in browsers that support `rgba()`.
+		/* UTDR change: use CSS variables
 		background: rgba( 255, 255, 255, 1 );
+		*/
+		background-color: @background-color-interactive;
 
 		a,
 		a:visited {

@@ -24,6 +24,8 @@
 //
 
 @color-link-selected: @color-base;
+// UTDR change: define this CSS variable
+@color-subtle: @color-base--subtle;
 
 //
 // == Typography ==
@@ -49,15 +51,22 @@
 @size-icon: unit( ( 20 / @font-size-browser ), em );
 
 // FIXME: Use global variable since Echo and CentralNotice use this variable
+/* UTDR change: use CSS variables
 @border-color-content: #a7d7f9;
 // Due to darker background gradient, border needs to be darkened for aligned visual perception.
 @border-color-content--tabs-inactive: darken( @border-color-content, 10% );
 @border-color-subtle: #c8ccd1;
+*/
+@border-color-content: @border-color-base;
+@border-color-content--tabs-inactive: @border-color-base;
 // Use `rgba()` notation for better Safari support, see T254489.
 @border-start-blockquote: 4px @border-style-base #eaecf0;
 @padding-blockquote: 8px 32px;
 
+/* UTDR change: use CSS variables
 @background-color-secondary--modern: #f8f9fa;
+*/
+@background-color-secondary--modern: @background-color-neutral-subtle;
 @background-color-page-container: @background-color-base;
 
 // Navigation

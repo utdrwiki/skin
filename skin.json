@@ -108,6 +108,7 @@
 		"vector": {
 			"class": "MediaWiki\\Skins\\Vector\\SkinVectorLegacy",
 			"services": [
+				"Vector.FeatureManagerFactory",
 				"LanguageConverterFactory"
 			],
 			"args": [

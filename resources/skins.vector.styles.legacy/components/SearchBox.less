@@ -10,7 +10,10 @@
 // When Vue.js has loaded this element will no longer be in the page and substituted with
 // a Codex element.
 .vector-search-box-input {
+	/* UTDR change: use CSS variables
 	background-color: rgba( 255, 255, 255, 0.5 );
+	*/
+	background-color: @background-color-base;
 	color: @color-emphasized;
 	width: 100%;
 	// Reduce height slightly from standard to match legacy Vector tabs.
