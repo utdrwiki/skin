@@ -23,6 +23,7 @@ a:where( .new:not( [ role='button' ] ) ) {
 	}
 
 	a.external {
+		/* UTDR change: use SVG masks to respect content link color
 		// Use copy of Codex/OOUI WikimediaUI theme's 'linkExternal' icon in progressive color.
 		// Note that CSSJanus is flipping the `ltr` in the URL to `rtl`.
 		// Therefore make sure that both icons are available and up-to-date.
@@ -32,6 +33,17 @@ a:where( .new:not( [ role='button' ] ) ) {
 		// Equivalent of `12px` at calculation base of `14px` is `0.857em`.
 		background-size: 0.857em;
 		padding-right: 1em;
+		*/
+		&::after {
+			background-color: @color-link;
+			content: "";
+			display: inline-block;
+			height: 1em;
+			-webkit-mask: url( images/link-external-small-ltr-progressive.svg ) top no-repeat;
+			mask: url( images/link-external-small-ltr-progressive.svg ) top no-repeat;
+			padding-left: 3px;
+			width: 12px;
+		}
 
 		// See T330712 for better understanding of this class and any future changes.
 		&.free {
@@ -69,8 +81,15 @@ a.mw-selflink {
 
 /* Plainlinks - this can be used to switch
  * off special external link styling */
+/* UTDR change: use SVG masks to respect content link color
 .plainlinks a.external {
 	background: none !important; /* stylelint-disable-line declaration-no-important */
+/* UTDR change: use SVG masks to respect content link color
 	padding: 0 !important; /* stylelint-disable-line declaration-no-important */
+/* UTDR change: use SVG masks to respect content link color
+}
+*/
+.plainlinks a.external::after {
+	display: none;
 }
 /* stylelint-enable selector-max-specificity */
