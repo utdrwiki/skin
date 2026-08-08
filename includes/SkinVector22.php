@@ -2,6 +2,8 @@
 
 namespace MediaWiki\Skins\Vector;
 
+use MediaWiki\Extension\Notifications\Formatters\EchoEventPresentationModel;
+use MediaWiki\Extension\Notifications\Mapper\NotificationMapper;
 use MediaWiki\Html\Html;
 use MediaWiki\Language\Language;
 use MediaWiki\Languages\LanguageConverterFactory;
@@ -30,7 +32,9 @@ use MediaWiki\Skins\Vector\FeatureManagement\FeatureManager;
 use MediaWiki\Skins\Vector\FeatureManagement\FeatureManagerFactory;
 use MediaWiki\Skins\Vector\NavParser;
 use MediaWiki\Skins\Vector\Hooks\HookRunner;
+use MediaWiki\User\TalkPageNotificationManager;
 use RuntimeException;
+use function count;
 
 /**
  * @ingroup Skins
@@ -50,6 +54,7 @@ class SkinVector22 extends SkinMustache {
 
 	public function __construct(
 		private readonly LanguageConverterFactory $languageConverterFactory,
+		private readonly TalkPageNotificationManager $talkPageNotificationManager,
 		private readonly FeatureManagerFactory $featureManagerFactory,
 		array $options
 	) {
@@ -362,6 +367,39 @@ class SkinVector22 extends SkinMustache {
 		$hookRunner->onTalkPageLinkResolve( $linkAttributes );
 
 		return $linkAttributes;
+	}
+
+	private function getTalkPageNotificationButton(): ?VectorComponentButton {
+		$user = $this->getUser();
+
+		if (
+			!$user->isRegistered() ||
+			!$this->talkPageNotificationManager->userHasNewMessages( $this->getUser() )
+		) {
+			return null;
+		}
+		$link = $user->getTalkPage()->getLocalURL();
+		$notificationMapper = new NotificationMapper();
+		$notifications = $notificationMapper->fetchUnreadByUser( $user, 2, null, [ 'edit-user-talk' ] );
+		if ( count( $notifications ) === 1 ) {
+			$presModel = EchoEventPresentationModel::factory(
+				current( $notifications )->getEvent(),
+				$this->getLanguage(),
+				$user,
+			);
+			$link = $presModel->getPrimaryLink()['url'];
+		}
+		return new VectorComponentButton(
+			$this->msg( 'echo-new-messages' )->text(),
+			'message',
+			'pt-talk-alert',
+			'mw-echo-alert',
+			[],
+			'primary',
+			'destructive',
+			true,
+			$link,
+		);
 	} 
 
 	public function getTemplateData(): array {
@@ -538,6 +576,7 @@ class SkinVector22 extends SkinMustache {
 			),
 			'data-main-menu' => $mainMenu,
 			'data-discussions-button' => $discussionsButton,
+			'data-talk-page-notification' => $this->getTalkPageNotificationButton(),
 			'data-main-menu-dropdown' => new VectorComponentDropdown(
 				VectorComponentMainMenu::ID . '-dropdown',
 				$this->msg( VectorComponentMainMenu::ID . '-label' )->text(),
